@@ -1,0 +1,21 @@
+<template>
+    <span :class="elClass + ' incoming-data'">
+        <p class="data-savings" v-if="elClass === 'incoming-green'">{{dataSavingsPercentage}}% Data savings</p>
+        <img src="~/assets/images/gauge_red.png" v-if="elClass === 'incoming-red'"/>
+        <img src="~/assets/images/gauge_green.png" v-if="elClass === 'incoming-green'"/>
+        <p>{{value}} bytes</p>
+    </span>
+</template>
+<script>
+export default ({
+    props: ['value', 'elClass'],
+    computed: {    
+        dataSavingsPercentage() {
+        if (this.$store.state.flights.showAll) {
+            return 100 - this.$store.state.flights.allAirlinesDataSavingPercentage
+        }
+        return 100 - this.$store.state.flights.byAirlineDataSavingPercentage
+        }
+    },
+})
+</script>
