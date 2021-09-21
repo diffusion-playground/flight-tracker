@@ -304,3 +304,12 @@ div.mobile-friendly {
     margin-left: 10px;
     font-size: 37px;
 }
+
+a {
+    color: #4bade9!important;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #198ace!important;
+}

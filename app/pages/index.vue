@@ -6,12 +6,14 @@
             <img src="~/assets/images/diffusion-logo.png" height="38px"/>
             &nbsp;<h1>Playground</h1>
           </div>          
-          <p>This sample app will show you how to <b>consume</b>, <b>enrich</b> and <b>deliver</b> real-time events with Diffusion </p>
+          <p>A sample web application to <b>consume</b>, <b>enrich</b> and <b>deliver</b> real-time events using Diffusion </p>
       </div>
     </div>
     <div class="d-centered-flex">
       <div class="col main-col">
-        <SectionHeader title="Consume"  subTitle="Start by connecting a live data source to your service" />        
+        <SectionHeader title="Consume"  subTitle="">
+          Consumer real-time events from <a href='https://www.pushtechnology.com/developers'>Source</a> using REST API
+        </SectionHeader>>        
         <div class="d-end-flex consume-flow">
           <div class="left-column consume-title">
             <div class="plane" />
@@ -26,7 +28,9 @@
         <FlightPoller></FlightPoller>
       </div>
       <div class="main-col middle no-border" style="width: 20%">
-        <SectionHeader title="Enrich" subTitle="Use Diffusion's data wrangling features to transform your data." />
+        <SectionHeader title="Enrich" subTitle="">
+          Transform the event-data using DSL (a declarative language) in Diffusion.
+        </SectionHeader>>
         
         <CloudOnPremiseToggle />
         
@@ -34,7 +38,9 @@
         <p class="flow-arrow-right-text">All real-time data wrangling is done by Diffusion on-the-fly, so that you only publish what’s needed and not all your event data stream </p>
       </div>
       <div class="col main-col right">
-        <SectionHeader title="Deliver" subTitle="Distribute your data to a web, mobile or IoT application." />
+        <SectionHeader title="Deliver" subTitle="">
+          Deliver the precise event-data required by the <a href="https://www.pushtechnology.com/search/diffusion-docs?q=JavaScript%20Client%20Application">client Application</a>
+        </SectionHeader>>
         <div class="d-start-flex deliver-flow">
           <div class="left-column consume-title">
             <img src="~/assets/images/deliver-flow.svg"/>            

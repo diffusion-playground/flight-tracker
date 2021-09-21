@@ -1,7 +1,7 @@
 <template>    
     <span class="col main-col no-border w-100">
         <h1 class="section-title">{{title}}</h1>
-        <p class="sub-text w-75">{{subTitle}}</p>
+        <p class="sub-text w-75"><slot></slot></p>
     </span>
 </template>
 <script>
