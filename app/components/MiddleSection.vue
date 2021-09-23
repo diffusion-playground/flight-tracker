@@ -8,10 +8,10 @@
             
         <img class="flow-arrow-right" src="~/assets/images/arrow-right.svg">
         <p class="flow-arrow-right-text">All real-time data wrangling is done by Diffusion on-the-fly, so that you only publish what’s needed and not all your event data stream </p>
-        <a href="#" class="btn" @click="showModal = true">Show Topic Tree</a>
+        <!-- <a href="#" class="btn" @click="showModal = true">Show Topic Tree</a>
         <Modal v-show="showModal" @close-modal="showModal = false" :width="80" :height="500">
             <TopicsBrowser />
-        </Modal>
+        </Modal> -->
     </div>
 </template>
 <script>
