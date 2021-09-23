@@ -34,6 +34,7 @@ export default {
     '~/plugins/datasource-poller',
     '~/plugins/content-datasource-poller',
     '~/plugins/diffusion-service',
+    '~/plugins/vue-tooltip.js',
     {src: '~/plugins/vue2-leaflet-markercluster.js', mode:'client'},
   ],
 
@@ -56,5 +57,6 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+    transpile: ['vue-tooltip']
+  },  
 }
