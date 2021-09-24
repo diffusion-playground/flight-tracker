@@ -352,3 +352,53 @@ a:hover {
     background: yellow;
     color: black;
   }
+
+#topicsTree {
+    height: 500px;
+    overflow: auto;
+    text-align: start !important;
+}
+
+.topic-container .topic-node {
+    padding: 0
+}
+
+.topic-container .topic-node .topic-container {    
+    padding-left: .5rem!important;    
+    border-left: 0.25rem solid rgb(97, 104, 168);
+}
+
+.topic-container .topic-node .topic-container .topic-node .topic-container{    
+    padding-left: .5rem!important;    
+    border-left: 0.25rem solid rgb(97, 104, 168);
+}
+
+.topic-container .topic-node .topic-container .topic-node {
+    padding-left: 0.25rem;
+}
+
+.topic-node-header {
+    cursor: pointer
+}
+
+
+.expand-button {
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin-right: .25rem
+}
+
+.select-topic {
+    flex-grow: 1;
+    flex-shrink: 1
+}
+
+.topic-container {
+    margin: 0;
+    padding: 0;
+    padding-left: .5rem!important;     
+}
+/*
+.d-none {
+    display: none;
+}*/

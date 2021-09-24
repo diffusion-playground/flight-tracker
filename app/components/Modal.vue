@@ -37,8 +37,7 @@ export default {
   z-index: 10000000;
 }
 
-.modal {
-  text-align: center;
+.modal {  
   background-color: white;
   height: 500px;
   width: 500px;

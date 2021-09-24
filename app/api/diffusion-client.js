@@ -121,4 +121,16 @@ export default class Diffusion {
             console.log('Session not available when trying to create TopicView: ', topicViewName, specification);
         }
     }
+
+    fetchInitialValues = (topic) => {
+        return this.session.fetchRequest()            
+            .withValues(diffusion.datatypes.json())
+            .fetch(topic)
+            .then(function(fetchResult) {
+                const results = fetchResult.results();
+
+                console.log("Fetch Request returned "+results.length+" topics", results);
+                return results
+            });
+    }
 }

@@ -1,5 +1,7 @@
 export const state = () => ({
-    subscribedFlights: []
+    subscribedFlights: [],
+    connected: false,
+    topicsTree: []
 })
 
 export const mutations = {
@@ -11,4 +13,10 @@ export const mutations = {
         state.subscribedFlights.push(remoteFlight)
       }
     },
+    setConnected(state, status) {
+      state.connected = status
+    },
+    setTopicsTree(state, topicsTree) {
+      state.topicsTree = topicsTree
+    }
   }

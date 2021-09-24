@@ -1,6 +1,16 @@
 <template>
-    <span class="d-start-flex">
-        <TopicsTree />
+    <div class="d-start-flex" :style="{'width': '100%'}">
+        <TopicsTree ref="topicsTree" />
         <TopicValue />
-    </span>
+    </div>
 </template>
+<script>
+    export default {
+        methods: {
+            show() {
+                this.$refs.topicsTree.show()
+            }
+        }
+    }
+</script>
+
