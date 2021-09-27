@@ -1,5 +1,5 @@
 <template>
-    <div :style="{'flex-grow':'1'}">
+    <div :style="{'flex-grow':'3'}">
         This is the Topic Value
     </div>
 </template>

@@ -22,11 +22,21 @@ export default class TopicsTreeBuilder {
         }
         results.forEach(topicResult => {
             try {
-                this.addLevelToFragmentTree(topicResult.value().get(), 0, null, this.baseTopic);
+                this.addLevelToFragmentTree(this.getNodeValue(topicResult), 0, null, this.baseTopic);
             } catch (e) {
                 console.log('Error building tree', e);
             }
         });        
+    }
+
+    getNodeValue = (topicResult) => {
+        const result = topicResult.value() ? 
+            topicResult.value().get() : 
+            {
+                nodeGroup: topicResult.path()
+            };
+        console.log('Result: ', result)
+        return result
     }
 
     getStartingNode = (results, nodeNameToFind, nodeId) => {
@@ -92,12 +102,22 @@ export default class TopicsTreeBuilder {
             return;
         }
 
-        if (typeof levelObject === 'object' && levelObject !== null) {            
-            for (const [key, value = ''] of Object.entries(levelObject)) {
-                let newPath = `${currentPath}/${key}`;
-                let newNode = this.addNewFragmentNode(key, value, isRoot, realParentNode, currentLevel, newPath);
+        if (typeof levelObject === 'object' && levelObject !== null) {    
+            if (!levelObject.nodeGroup) {
+                for (const [key, value = ''] of Object.entries(levelObject)) {
+                    let newPath = `${currentPath}/${key}`;
+                    let newNode = this.addNewFragmentNode(key, value, isRoot, realParentNode, currentLevel, newPath);
+                    if (currentLevel <= this.maxLevels) {
+                        this.addLevelToFragmentTree(value, currentLevel, newNode, newPath);
+                    }
+                }
+            } else {
+                const pathArr = levelObject.nodeGroup.split('/')
+                const key = pathArr[pathArr.length - 1]
+                let newPath = `${currentPath}/${pathArr[pathArr.length - 1]}`;
+                let newNode = this.addNewFragmentNode(key, '', isRoot, realParentNode, currentLevel, newPath);
                 if (currentLevel <= this.maxLevels) {
-                    this.addLevelToFragmentTree(value, currentLevel, newNode, newPath);
+                    this.addLevelToFragmentTree('', currentLevel, newNode, newPath);
                 }
             }
         }
@@ -185,6 +205,12 @@ export default class TopicsTreeBuilder {
         });
     }
 
+    findNodeByPath = (path, parent) => {
+        const node = [...parent.querySelectorAll('.isTreeTopic')].find(node => node.dataset.path === path)
+        console.log(node)                    
+        return node;
+    }
+
     addPathToTree = (path, fragmentTreeRoot) => {
         let parent = null;
         let isRoot = true;
@@ -193,7 +219,7 @@ export default class TopicsTreeBuilder {
         for (const item of path) {
             if (item.length === 0) continue;                        
             newPath = `${newPath}/${item}`;
-            let foundNode = this.findNode(parent || this.treeRootEl, newPath)
+            let foundNode = this.findNodeByPath(newPath, fragmentTreeRoot)
             if (!foundNode) {
                 parent = this.addNewFragmentNode(item, [], isRoot, parent || fragmentTreeRoot, currentLevel, newPath, true);
             } else {
@@ -211,7 +237,7 @@ export default class TopicsTreeBuilder {
         this.treeRootEl = this.createTreeFragmentRootNode();
         bodyDiv = bodyDiv || this.topicsRootEl
         bodyDiv.innerHTML = '';
-        this.buildTreeFragment(results, true);
+        this.buildTreeFragment(results, false);
         console.log('Tree FROM RESULTS GENERATED')
         //Show the tree
         bodyDiv.appendChild(this.treeFragment);

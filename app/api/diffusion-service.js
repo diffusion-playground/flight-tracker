@@ -117,7 +117,7 @@ export default $store => ({
     async fetchInitialValues(topic) {
         console.log('TOPIC: ', topic)
         const results = await this.diffusionClient.fetchInitialValues(topic)
-        console.log('Service RESLTS: ', results[0].value().get(), results)
+        //console.log('Service RESLTS: ', results[0].value().get(), results)
         this.store.commit('diffusion/setTopicsTree', results)
         return results;
     }

@@ -17,13 +17,9 @@ export default ({
     methods: {
         async show() {
             if (!this.treeLoaded) {
-                const results = await this.$diffusionService.fetchInitialValues('?REST//')
-                console.log('Topics: ', results)
+                const results = await this.$diffusionService.fetchInitialValues('?REST//')                
                 this.topicsTree = new FlightTrackerTree('#topicsTree')
-                /*this.topicsTree.createDataTreeFromResults(results)
-                this.topicsTree.showTreeFromResults(results, () => {})*/
-                //this.topicsTree.showTreeFromData(results)
-                this.topicsTree.showTreeFromResults(results)
+                this.topicsTree.showTreeFromData(results)
                 this.treeLoaded = true
             }
         }

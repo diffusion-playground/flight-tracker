@@ -128,8 +128,7 @@ export default class Diffusion {
             .fetch(topic)
             .then(function(fetchResult) {
                 const results = fetchResult.results();
-
-                console.log("Fetch Request returned "+results.length+" topics", results);
+                //console.log("Fetch Request returned "+results.length+" topics", results);
                 return results
             });
     }
