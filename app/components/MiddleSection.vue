@@ -7,15 +7,21 @@
         <CloudOnPremiseToggle />
             
         <img class="flow-arrow-right" src="~/assets/images/arrow-right.svg">
-        <p class="flow-arrow-right-text">All real-time data wrangling is done by Diffusion on-the-fly, so that you only publish what’s needed and not all your event data stream </p>
-        <a href="#" class="btn" @click="onShowTopicsTree">Show Topic Tree</a>
+        <p class="flow-arrow-right-text">All real-time data wrangling is done by Diffusion on-the-fly, so that you only publish what’s needed and not all your event data stream </p>        
+        <a href="#" class="btn" @click="onShowTopicsTree" v-if="diffusionConnected">Show Topic Tree</a>
         <Modal v-show="showModal" @close-modal="showModal = false" :width="80" :height="500">
             <TopicsBrowser ref="topicsBrowser" />
         </Modal>
+
     </div>
 </template>
 <script>
 export default ({
+    computed: {
+        diffusionConnected() {
+            return this.$store.state.diffusion.connected
+        } 
+    },
     data() {
         return {
             showModal: false,

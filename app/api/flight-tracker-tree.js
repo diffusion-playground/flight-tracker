@@ -1,13 +1,13 @@
 import TopicsTreeBuilder from "./topics-tree";
 
 export default class FlightTrackerTree {   
-    constructor(treeDivSelector, baseTopic) {
-        this.topicsRootEl = document.querySelector(treeDivSelector);
-        this.baseTopic = baseTopic;
+    constructor(treeDivSelector) {
+        this.topicsRootEl = document.querySelector(treeDivSelector);        
         this.maxLevels = 11;
         this.treeFragment = new DocumentFragment();
         this.treeRootEl = this.createTreeFragmentRootNode();
-        this.isGenerated = false;
+        this.isGenerated = false
+        this.subscribeCallback = null
     }
 
     createTreeFragmentRootNode = () => {
@@ -15,6 +15,11 @@ export default class FlightTrackerTree {
         fragmentTreeRoot.classList.add('topic-container', 'treeRootEl');
         this.treeFragment.appendChild(fragmentTreeRoot);
         return fragmentTreeRoot;
+    }
+
+    setSubscribeCallback = callback => {
+        this.subscribeCallback = callback
+        return this
     }
 
     showTreeFromData = results => {        
@@ -33,6 +38,7 @@ export default class FlightTrackerTree {
         this.isGenerated = true
 
         this.addTreeListeners();
+        return this
     }
 
     processNodes = nodes => {        
@@ -98,6 +104,9 @@ export default class FlightTrackerTree {
         evt.preventDefault();
         evt.stopPropagation();        
         this.toggleTreeNode(evt)
+        if (this.subscribeCallback) {
+            this.subscribeCallback(evt.currentTarget.parentNode.dataset)
+        }
     }
 
     toggleTreeNode = evt => {

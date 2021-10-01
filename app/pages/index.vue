@@ -64,6 +64,7 @@ export default {
         () => { 
           //this.startPollingFlights();               
           DataSourceFeeder.startPolling(3000, this.$store)
+          this.$store.commit('diffusion/setConnected', true)
         }
     );      
   }

@@ -27,6 +27,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '~/assets/main.css',
+    'vue-json-pretty/lib/styles.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -36,6 +37,7 @@ export default {
     '~/plugins/diffusion-service',
     '~/plugins/vue-tooltip.js',
     {src: '~/plugins/vue2-leaflet-markercluster.js', mode:'client'},
+    '@/plugins/vue-json-pretty',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
