@@ -10,6 +10,7 @@ export default $store => ({
         this.diffusionStore = null
         this.onConnectedCallback = null
         this.$store = null        
+        this.currentTreeTopic = null
     },
     
     diffusionClient() { return this.diffusionClient },
@@ -65,15 +66,22 @@ export default $store => ({
         }
     },
 
-    /*onSourceDataMessage(topic, specification, newValue, oldValue) {
-        let message = newValue.get();
-        console.log('OnSourceDataMessage: ', topic)        
-        //this.store.commit('diffusion/set', message)
-    },*/
+    replaceSubscription(topicPath, isLeaf) {
+        if (this.currentTreeTopic) {
+            this.diffusionClient.unsubscribe(this.currentTreeTopic)
+            this.currentTreeTopic = null
+        }
+        if (!isLeaf) {
+            return
+        }
+        this.diffusionClient.subscribe(topicPath)
+        this.currentTreeTopic = topicPath
+    },
         
-    onDiffusionMessage(message, topic) {        
-        //console.log('OnDiffusioMessage: ', topic)        
-        this.store.commit('diffusion/set', message)
+    onDiffusionMessage(message, topic) {
+        //console.log('OnDiffusioMessage: ', topic)
+        this.store.commit('diffusion/setTopic', topic.trim())        
+        this.store.commit('diffusion/set', message)        
     },
 
     /**
@@ -84,8 +92,7 @@ export default $store => ({
         this.diffusionClient.publishData(data);
     },
 
-    setTopicViews() {
-        console.log('Setting TopicViews', this.topicsStore.topicViews);
+    setTopicViews() {        
         if (this.topicsStore.topicViews) {
             for (const topicView of this.topicsStore.topicViews) {
                 this.diffusionClient.createTopicView(topicView.name, this.formatTopicViewExpression(topicView.specification));
@@ -112,5 +119,13 @@ export default $store => ({
 
     setStore(store) {
         this.store = store
+    },
+
+    async fetchInitialValues(topic) {
+        console.log('TOPIC: ', topic)
+        const results = await this.diffusionClient.fetchInitialValues(topic)
+        //console.log('Service RESLTS: ', results[0].value().get(), results)
+        this.store.commit('diffusion/setTopicsTree', results)
+        return results;
     }
 }) 

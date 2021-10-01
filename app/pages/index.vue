@@ -4,10 +4,11 @@
       <Header />
     </div>
     <div class="d-centered-flex">
-      <LeftSection />
-      
+      <!-- CONSUME -->
+      <LeftSection /> 
+      <!-- ENRICH -->     
       <MiddleSection/>      
-
+      <!-- DELIVER -->
       <RightSection />      
     </div>
   </div>
@@ -16,11 +17,6 @@
 import DataSourceFeeder from '../components/DataSourceFeeder'
 
 export default {  
-  computed: {      
-  },
-  data() {
-    return {}
-  },
   asyncData() {
     return {
       rendering: process.server ? 'server' : 'client'
@@ -68,6 +64,7 @@ export default {
         () => { 
           //this.startPollingFlights();               
           DataSourceFeeder.startPolling(3000, this.$store)
+          this.$store.commit('diffusion/setConnected', true)
         }
     );      
   }

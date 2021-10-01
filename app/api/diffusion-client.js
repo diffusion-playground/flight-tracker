@@ -87,7 +87,7 @@ export default class Diffusion {
     unsubscribe = (topicSelector, session = null) => {
         const currentSession = session || this.session;
         if (topicSelector) {
-            currentSession.unsubscribe(topicSelector);
+            currentSession.unsubscribe(currentSession, topicSelector);
             return;
         }
         console.log('Topic not specified: ' + topicSelector)
@@ -96,7 +96,7 @@ export default class Diffusion {
     onReceiveMessage = (topic, specification, newValue, oldValue) => {
         let message = newValue.get();
         message.receiveTime = new Date();
-        //console.log(`TOPIC - Receiving message for topic: ${topic}`, specification, newValue.get(), oldValue.get());
+        //console.log(`TOPIC - Receiving message for topic: ${topic}`, specification, newValue.get());
         if (this.onReceiveMessageCallback) {
             this.onReceiveMessageCallback(message, topic).bind(this);
         }
@@ -120,5 +120,16 @@ export default class Diffusion {
         } else {
             console.log('Session not available when trying to create TopicView: ', topicViewName, specification);
         }
+    }
+
+    fetchInitialValues = (topic) => {
+        return this.session.fetchRequest()            
+            .withValues(diffusion.datatypes.json())
+            .fetch(topic)
+            .then(function(fetchResult) {
+                const results = fetchResult.results();
+                //console.log("Fetch Request returned "+results.length+" topics", results);
+                return results
+            });
     }
 }
