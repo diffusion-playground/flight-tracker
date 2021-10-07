@@ -33,7 +33,8 @@ export default {
   right: 0;
   display: flex;
   justify-content: center;
-  background-color: transparent !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  transition: opacity .15s linear;
   z-index: 10000000;
 }
 
