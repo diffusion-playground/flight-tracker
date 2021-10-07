@@ -28,7 +28,10 @@ export const mutations = {
   }
 
   export const actions = {
-    getTopicValue({state}, flightId) {      
+    getTopicValue({state}, flightId) {            
       return state.subscribedFlights ? state.subscribedFlights.find(flight => flight[1].trim() == flightId) : {}
+    },
+    getTreeTopicValue({state}) {
+      return state.topicsTree
     }
   }

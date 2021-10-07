@@ -8,6 +8,8 @@ export default class FlightTrackerTree {
         this.treeRootEl = this.createTreeFragmentRootNode();
         this.isGenerated = false
         this.subscribeCallback = null
+        this.selectedNode = null
+        this.nonCollapsiblePaths = ['opensky-network.org', 'REST']
     }
 
     createTreeFragmentRootNode = () => {
@@ -38,6 +40,12 @@ export default class FlightTrackerTree {
         this.isGenerated = true
 
         this.addTreeListeners();
+
+        setTimeout(
+            this.selectPath('/REST/opensky-network.org'),
+            1000
+        )
+
         return this
     }
 
@@ -73,7 +81,9 @@ export default class FlightTrackerTree {
 
     addNode = (nodePath, nodeName, parentNode, indent = 0.25, isRoot = true) => {
         const newFragmentNode = document.createElement('div');
-        newFragmentNode.classList.add('topic-node', 'isTreeTopic', this.getNodeType(isRoot), this.isHidden(isRoot));
+        newFragmentNode.classList.add('topic-node', 'isTreeTopic', this.getNodeType(isRoot), 'd-block');
+        const collapsableClass = (this.nonCollapsiblePaths.includes(nodeName)) ? 'not-collapsable' : 'collapsable'
+        newFragmentNode.classList.add(collapsableClass)
         newFragmentNode.dataset.path = nodePath
         newFragmentNode.dataset.isLeaf = true
         newFragmentNode.style.marginLeft = `${indent}rem`
@@ -102,11 +112,20 @@ export default class FlightTrackerTree {
 
     onTreeNodeClick = evt => {
         evt.preventDefault();
-        evt.stopPropagation();        
-        this.toggleTreeNode(evt)
+        evt.stopPropagation(); 
+        this.markNodeSelected(evt.currentTarget)
+        if (evt.currentTarget.parentNode.classList.contains('collapsable')) {
+            this.toggleTreeNode(evt)
+        }
         if (this.subscribeCallback) {
             this.subscribeCallback(evt.currentTarget.parentNode.dataset)
         }
+    }
+
+    markNodeSelected = node => {
+        this.selectedNode?.classList.remove('selected')
+        this.selectedNode = node
+        this.selectedNode.classList.add('selected');
     }
 
     toggleTreeNode = evt => {
@@ -135,5 +154,11 @@ export default class FlightTrackerTree {
                 icon.classList.add('expand');
             }
         }
+    }
+
+    selectPath = path => {
+        // tree-node is a div that contains an a
+        const node = this.treeRootEl.querySelector(`div[data-path="${path}"] a`)        
+        node.click()
     }
 }

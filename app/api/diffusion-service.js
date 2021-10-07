@@ -59,7 +59,7 @@ export default $store => ({
         
         this.diffusionClient.subscribe({topicPath: '?REST/opensky-network.org/airlines//'})
 
-        //this.diffusionClient.subscribe({topicPath: '?REST/opensky-network.org/', onValueCallback: this.onSourceDataMessage.bind(this)})
+        this.diffusionClient.subscribe({topicPath: 'REST/opensky-network.org', onValueCallback: this.onSourceDataMessage.bind(this)})
 
         if (this.onConnectedCallback) {
             this.onConnectedCallback();
@@ -82,6 +82,11 @@ export default $store => ({
         //console.log('OnDiffusioMessage: ', topic)
         this.store.commit('diffusion/setTopic', topic.trim())        
         this.store.commit('diffusion/set', message)        
+    },
+
+    async onSourceDataMessage(topic, specification, newValue, oldValue) {        
+        const message = await newValue.get()       
+        this.store.commit('diffusion/setTopicsTree', message)
     },
 
     /**
@@ -123,9 +128,7 @@ export default $store => ({
 
     async fetchInitialValues(topic) {
         console.log('TOPIC: ', topic)
-        const results = await this.diffusionClient.fetchInitialValues(topic)
-        //console.log('Service RESLTS: ', results[0].value().get(), results)
-        this.store.commit('diffusion/setTopicsTree', results)
+        const results = await this.diffusionClient.fetchInitialValues(topic)        
         return results;
     }
 }) 

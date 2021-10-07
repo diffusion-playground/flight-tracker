@@ -1,5 +1,5 @@
 <template>
-    <div class="d-start-flex" :style="{'width': '100%'}">
+    <div class="d-start-flex" :style="{'width': '98%'}">
         <TopicsTree ref="topicsTree" />
         <TopicValue ref="topicValue" :selectedTopic="currentSubscribedPath" :lastTopic="lastTopic" :lastValue="lastTopicValue" />
     </div>
@@ -7,11 +7,6 @@
 <script>
 import FlightTrackerTree from '../api/flight-tracker-tree.js'
 export default {
-    /*methods: {
-        show() {
-            this.$refs.topicsTree.show()
-        }
-    }*/
     data() {
         return {
             topicsTree: null,

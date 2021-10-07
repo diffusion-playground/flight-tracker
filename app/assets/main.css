@@ -1,3 +1,12 @@
+html {
+	font-size: 16px;
+	font-family: Roboto, sans-serif;
+	min-height: 100%!important;
+	color: #000;
+	position: relative;
+	transition: all .5s
+}
+
 .d-centered-flex, .d-end-flex, .d-start-flex {
     display: flex;    
     padding: 0.5rem;
@@ -354,9 +363,14 @@ a:hover {
   }
 
 #topicsTree {
-    height: 500px;
+    height: 320px;
     overflow: auto;
     text-align: start !important;
+}
+
+.tree-section {
+    border: 1px solid #252525;
+    padding: 5px
 }
 
 .topic-container .topic-node {
@@ -365,13 +379,17 @@ a:hover {
 
 .topic-node {    
     display: block;    
-    border-left: 0.25rem solid rgb(97, 104, 168);
+    /*border-left: 0.25rem solid rgb(97, 104, 168);*/
 }
 
-.topic-node a {
+.topic-node a, .topic-node a.selected {
     line-height: 24px;
     justify-content: flex-start;
     display: flex;
+}
+
+.topic-node a.selected {
+    font-weight: 700;
 }
 
 .topic-node a span.plane {    
@@ -380,6 +398,8 @@ a:hover {
     width: 20px;
     height: 20px;
 }
+
+
 
 .topic-node.root-node {
     border: 0

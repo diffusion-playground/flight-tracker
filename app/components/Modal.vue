@@ -33,20 +33,21 @@ export default {
   right: 0;
   display: flex;
   justify-content: center;
-  background-color: #000000da;
+  background-color: transparent !important;
   z-index: 10000000;
 }
 
 .modal {  
   background-color: white;
-  height: 500px;
+  height: 560px;
   width: 500px;
-  margin-top: 10%;
-  padding: 60px 0;
-  border-radius: 20px;
+  margin-top: 1rem;
+  padding: 10px 0;
+  border-radius: 10px;
+  border: 1px solid lightgray;
 }
 .close {
-  margin: 10% 0 0 16px;
+  margin: 1rem 0 0 16px;
   cursor: pointer;
 }
 
