@@ -6,10 +6,9 @@
             
         <CloudOnPremiseToggle />
             
-        <a href="#" class="btn open-tree-btn" @click="onShowTopicsTree" v-if="diffusionConnected">Show Topic Tree</a>
-
         <p class="flow-arrow-right-text">All real-time data wrangling is done by Diffusion on-the-fly, so that you only publish what’s needed and not all your event data stream </p>        
         
+        <DButton :dhref="`#`" :dtext="`Show Topic Tree`" :dclass="`btn mr-2 btn-primary`" @dclick="onShowTopicsTree" v-if="diffusionConnected" />        
         <Modal v-show="showModal" @close-modal="showModal = false" :width="50" :height="700">
             <div class="topic-tree-intro">
                 <p>

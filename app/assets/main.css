@@ -389,7 +389,10 @@ a:hover {
 }
 
 .topic-node a.selected {
-    font-weight: 700;
+    font-weight: 700;    
+    font-size: larger;
+    background-color: #EDF6FB;
+    padding: 5px 0;
 }
 
 .topic-node a span.plane {    

@@ -10,6 +10,7 @@ export default class FlightTrackerTree {
         this.subscribeCallback = null
         this.selectedNode = null
         this.nonCollapsiblePaths = ['opensky-network.org', 'REST']
+        this.initiallyCollapsed = ['American', 'Delta', 'Private', 'Skywest', 'Southwest', 'United', 'all', 'True', 'False']
     }
 
     createTreeFragmentRootNode = () => {
@@ -40,13 +41,22 @@ export default class FlightTrackerTree {
         this.isGenerated = true
 
         this.addTreeListeners();
+        
+        this.collapseInitial()
 
-        setTimeout(
-            this.selectPath('/REST/opensky-network.org'),
-            1000
-        )
+        this.selectPath('/REST/opensky-network.org')
 
         return this
+    }
+
+    collapseInitial = () => {
+        [...this.treeRootEl.querySelectorAll(`.icollapsed`)] // All topic nodes to be initially collapsed        
+        .map(node => this.toggleChildNodes(node)) // toggle it
+    }
+
+    nodeName = path => {
+        const len = path.split('/').lenght
+        return path.split('/')[len - 1]
     }
 
     processNodes = nodes => {        
@@ -84,6 +94,8 @@ export default class FlightTrackerTree {
         newFragmentNode.classList.add('topic-node', 'isTreeTopic', this.getNodeType(isRoot), 'd-block');
         const collapsableClass = (this.nonCollapsiblePaths.includes(nodeName)) ? 'not-collapsable' : 'collapsable'
         newFragmentNode.classList.add(collapsableClass)
+        const initialliCollapsedClass = (this.initiallyCollapsed.includes(nodeName)) ? 'icollapsed' : 'iexpanded'
+        newFragmentNode.classList.add(initialliCollapsedClass)
         newFragmentNode.dataset.path = nodePath
         newFragmentNode.dataset.isLeaf = true
         newFragmentNode.style.marginLeft = `${indent}rem`
@@ -128,9 +140,14 @@ export default class FlightTrackerTree {
         this.selectedNode.classList.add('selected');
     }
 
-    toggleTreeNode = evt => {
-        const parent = evt.currentTarget.parentNode;
-        [...parent.querySelectorAll(':scope > div.isTreeTopic')].map(childNode => this.toggleChildNode(childNode))        
+    toggleTreeNode = evt => {        
+        this.toggleChildNodes(evt.currentTarget.parentNode)        
+    }
+
+    toggleChildNodes = parent => {
+        [...parent.querySelectorAll(':scope > div.isTreeTopic')]
+        .map(childNode => this.toggleChildNode(childNode))        
+
         this.toggleTreeIcon(parent.querySelector(':scope span.icon'))
     }
 
