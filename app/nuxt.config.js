@@ -50,11 +50,23 @@ export default {
   modules: [    
     '@nuxtjs/axios',
     'nuxt-leaflet',
-    '@nuxt/content'
+    '@nuxt/content',
+    '@nuxtjs/gtm',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
+  
+  // Google Tag Manager
+  gtm: {
+    id: 'GTM-5PBMGLN'
+  },
+
+  publicRuntimeConfig: {
+    gtm: {
+      id: process.env.GOOGLE_TAG_MANAGER_ID
+    }
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
