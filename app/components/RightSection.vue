@@ -55,16 +55,16 @@ export default ({
             text: 'American Airlines'
         },
         {
-            value: 'AMX',
-            text: 'Aeromexico'
-        }, 
-        {
             value: 'DAL',
             text: 'Delta Airlines',        
         },
         {
-            value: 'FDX',
-            text: 'Federal Express',        
+            value: 'N',
+            text: 'Private',        
+        },
+        {
+            value: 'SKW',
+            text: 'Skywest Airlines',        
         },
         {
             value: 'SWA',
@@ -108,8 +108,8 @@ export default ({
     },
     methods: {
         /** Filter Airlines */
-        filterAirlines(flight, selectedFilter) {          
-          return flight[1].substr(0,3) === selectedFilter && this.latLongIsValid(flight)
+        filterAirlines(flight, selectedFilter) {                     
+          return flight[1].substr(0,selectedFilter.length) === selectedFilter && this.latLongIsValid(flight)
         },
 
         /** Filter by Altitude */
