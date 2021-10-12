@@ -1,5 +1,3 @@
-import TopicsTreeBuilder from "./topics-tree";
-
 export default class FlightTrackerTree {   
     constructor(treeDivSelector) {
         this.topicsRootEl = document.querySelector(treeDivSelector);        
