@@ -1,18 +1,6 @@
 import Diffusion from "./diffusion-client";
 
-export default $store => ({    
-    constructor() {
-        this.diffusionClient = null
-        this.chart = null
-        this.topicsStore = $store.state.topics
-        this.isConnected = false
-        this.flightsStore = null
-        this.diffusionStore = null
-        this.onConnectedCallback = null
-        this.$store = null        
-        this.currentTreeTopic = null
-    },
-    
+export default $store => ({            
     diffusionClient() { return this.diffusionClient },
 
     /**
@@ -53,20 +41,20 @@ export default $store => ({
     onConnectedToDiffusion() {
         console.log('connected to diffusion');
         
-        //this.setTopicViews();
+        this.setTopicViews();
         
         this.isConnected = true;
         
-        this.diffusionClient.subscribe({topicPath: '?REST/opensky-network.org/airlines//'})
+        this.diffusionClient.subscribe({topicPath: '?ESPN/nba-scoreboard/events/.*'})
 
-        this.diffusionClient.subscribe({topicPath: 'REST/opensky-network.org', onValueCallback: this.onSourceDataMessage.bind(this)})
+        //this.diffusionClient.subscribe({topicPath: 'REST/opensky-network.org', onValueCallback: this.onSourceDataMessage.bind(this)})
 
         if (this.onConnectedCallback) {
             this.onConnectedCallback();
         }
     },
 
-    replaceSubscription(topicPath, isLeaf) {
+    replaceSubscription(topicPath, isLeaf, callbackFn) {
         if (this.currentTreeTopic) {
             this.diffusionClient.unsubscribe(this.currentTreeTopic)
             this.currentTreeTopic = null
@@ -74,14 +62,15 @@ export default $store => ({
         if (!isLeaf) {
             return
         }
-        this.diffusionClient.subscribe(topicPath)
+        this.diffusionClient.subscribe({topicPath: topicPath, onValeCallback: callbackFn})
         this.currentTreeTopic = topicPath
     },
         
     onDiffusionMessage(message, topic) {
-        //console.log('OnDiffusioMessage: ', topic)
-        this.store.commit('diffusion/setTopic', topic.trim())        
-        this.store.commit('diffusion/set', message)        
+        console.log('OnDiffusioMessage: ', topic, message)
+        this.store.commit('nba/setEvent', message)
+        //this.store.commit('diffusion/setTopic', topic.trim())        
+        //this.store.commit('diffusion/set', message)        
     },
 
     async onSourceDataMessage(topic, specification, newValue, oldValue) {        
@@ -130,5 +119,17 @@ export default $store => ({
         console.log('TOPIC: ', topic)
         const results = await this.diffusionClient.fetchInitialValues(topic)        
         return results;
+    },
+
+    async fetchTreeTopics(topic) {
+        console.log('TREE TOPICS: ', topic)
+        const results = await this.diffusionClient.fetchTopicWithNoValues(topic)        
+        return results;
+    },
+
+    async fetchTopicValue(topic) {
+        console.log('TOPIC VALUE: ', topic)
+        const result = await this.diffusionClient.fetchTopicValue(topic)                
+        return result;
     }
 }) 

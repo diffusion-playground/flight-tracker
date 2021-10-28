@@ -11,10 +11,12 @@ export default ({
     props: ['value', 'elClass'],
     computed: {    
         dataSavingsPercentage() {
-        if (this.$store.state.flights.showAll) {
-            return 100 - this.$store.state.flights.allAirlinesDataSavingPercentage
-        }
-        return 100 - this.$store.state.flights.byAirlineDataSavingPercentage
+            /* TODO: make this function open for extension, closed for change, taking into account other templates */
+            return this.$store.state.app.config ? this.$store.state.app.config.getSavingsPercentage(
+                () => true,
+                this.$store.state.nba.savingsPercentage,
+                this.$store.state.nba.savingsPercentage
+            ) : 0
         }
     },
 })

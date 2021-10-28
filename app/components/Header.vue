@@ -4,7 +4,16 @@
             <img src="~/assets/images/diffusion-logo.png" height="38px"/>
             &nbsp;<h1>Playground</h1>        
         </div>          
-        <h3 :style="{'margin-top': '10px', 'color':'#1C376C', 'font-size':'28px'}">Flight Tracker Application</h3>
+        <h3 :style="{'margin-top': '10px', 'color':'#1C376C', 'font-size':'28px'}">{{appTitle}}</h3>
         <p>A sample web application to <b>consume</b>, <b>enrich</b> and <b>deliver</b> real-time events using Diffusion </p>
     </div>
 </template>
+<script>
+export default ({
+    computed: {
+        appTitle() {
+            return this.$store.state.app.config ? this.$store.state.app.config.getTitle() : ''
+        } 
+    },
+})
+</script>

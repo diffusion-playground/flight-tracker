@@ -15,6 +15,7 @@
 </template>
 <script>
 import DataSourceFeeder from '../components/DataSourceFeeder'
+import Config from '../api/config/config'
 
 export default {  
   asyncData() {
@@ -26,7 +27,7 @@ export default {
     script: [
         {  
             type: 'text/javascript', 
-            src: 'https://download.pushtechnology.com/clients/6.5.1/js/diffusion-6.5.1.js',
+            src: 'https://download.pushtechnology.com/clients/6.7.1/js/diffusion-6.7.1.js',
             async: false
         }
     ]
@@ -44,13 +45,22 @@ export default {
 
         setPolledMockData(flights) {
           this.$store.commit('flights/set', flights);
-        },        
+        },
+        initAppConfig(name) {
+          this.$store.commit(
+            'app/setConfig',
+            this.$store.state.app.template === 'nba'?
+            this.$NBAConfig : this.$flightTrackerConfig
+          )
+          this.$store.state.app.config.init(this.$store)
+        }
     },
   async mounted() {
     this.$diffusionService.setTopicsStore(this.$store.state.topics)
-    this.$diffusionService.setFlightsStore(this.$store.state.flights)
+    //this.$diffusionService.setFlightsStore(this.$store.state.flights)
     this.$diffusionService.setDiffusionStore(this.$store.state.diffusion)
-    this.$diffusionService.setStore(this.$store)    
+    this.$diffusionService.setStore(this.$store)     
+    this.initAppConfig('nba')
 
     /** Connect to DIFFUSION */    
     this.$diffusionService.connect(

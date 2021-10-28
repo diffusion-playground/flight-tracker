@@ -87,7 +87,7 @@ export default class Diffusion {
     unsubscribe = (topicSelector, session = null) => {
         const currentSession = session || this.session;
         if (topicSelector) {
-            currentSession.unsubscribe(currentSession, topicSelector);
+            currentSession.unsubscribe(topicSelector);
             return;
         }
         console.log('Topic not specified: ' + topicSelector)
@@ -123,8 +123,22 @@ export default class Diffusion {
     }
 
     fetchInitialValues = (topic) => {
+        console.log('Fetching value...')
         return this.session.fetchRequest()            
             .withValues(diffusion.datatypes.json())
+            .fetch(topic)
+            .then(function(fetchResult) {
+                const results = fetchResult.results();
+                console.log("Fetch Request returned "+results.length+" topics", results);
+                return results
+            });
+    }
+
+    // Alias for better legibility
+    fetchTopicValue = this.fetchInitialValues
+
+    fetchTopicWithNoValues = topic => {
+        return this.session.fetchRequest()            
             .fetch(topic)
             .then(function(fetchResult) {
                 const results = fetchResult.results();

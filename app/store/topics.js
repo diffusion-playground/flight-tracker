@@ -1,24 +1,24 @@
 export const state = () => ({
-    rootTopic: 'REST/opensky-network.org',
+    rootTopic: 'ESPN/nba-scoreboard',
     topicViews: [
         {
-            name: 'OpenSky 1',
+            name: 'SportsNBA 1',
             specification: 'map ?{{topic}}/.*// to <path(0)>/<expand()>'
         },
         {
-            name: 'OpenSky 2',
+            name: 'SportsNBA 2',
             specification: 'map ?{{topic}}/.*// to <path(0)>/<expand()>/<expand()>'
         },
         {
-            name: 'OpenSky 3',
+            name: 'SportsNBA 3',
             specification: 'map ?{{topic}}/.*// to <path(0)>/<expand()>/<expand()>/<expand()>'
         },
         {
-            name: 'OpenSky 4',
+            name: 'SportsNBA 4',
             specification: 'map ?{{topic}}/.*// to <path(0)>/<expand()>/<expand()>/<expand()>/<expand()>'
         },
         {
-            name: 'OpenSky 5',
+            name: 'SportsNBA 5',
             specification: 'map ?{{topic}}/.*// to <path(0)>/<expand()>/<expand()>/<expand()>/<expand()>/<expand()>'
         }
     ]

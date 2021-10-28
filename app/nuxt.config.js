@@ -33,6 +33,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    {src: '~/plugins/app-config', mode: 'client'},
     '~/plugins/diffusion-service',
     '~/plugins/vue-tooltip.js',
     {src: '~/plugins/vue2-leaflet-markercluster.js', mode:'client'},

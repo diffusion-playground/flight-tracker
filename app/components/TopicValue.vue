@@ -14,15 +14,18 @@ export default ({
     },
     props: ['lastTopic', 'lastValue', 'selectedTopic'],
     methods: {
-        ...mapActions('diffusion', ['getTopicValue', 'getTreeTopicValue']),
+        ...mapActions('nba', ['getTopicValue', 'getTreeTopicValue']),
         async setTopicValue(topicPath) {    
-            if (topicPath === '/REST/opensky-network.org') {
+            if (topicPath === '/REST/sports/nba') {
                 this.currentValue = await this.getTreeTopicValue()
                 return
             }
             topicPath = topicPath.split('/')
-            const flightCallout = topicPath[topicPath.length - 1]
-            this.currentValue = await this.getTopicValue(flightCallout) ?? { value: "No Value"}
+            const topicId = topicPath[topicPath.length - 1]
+            this.currentValue = await this.getTopicValue(topicId) ?? { value: "No Value"}
+        },
+        setTopicValueFromData(data) {            
+            this.currentValue = data
         }
     },
 })

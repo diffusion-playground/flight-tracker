@@ -9,7 +9,7 @@
         <p class="flow-arrow-right-text">All real-time data wrangling is done by Diffusion on-the-fly, so that you only publish what’s needed and not all your event data stream </p>        
         
         <DButton :dhref="`#`" :dtext="`Show Topic Tree`" :dclass="`btn mr-2 btn-primary`" @dclick="onShowTopicsTree" v-if="diffusionConnected" />        
-        <Modal v-show="showModal" @close-modal="showModal = false" :width="50" :height="700">
+        <Modal v-show="showModal" @close-modal="showModal = false" :width="51" :height="700">
             <div class="topic-tree-intro">
                 <p>
                     You can filter and wrangle your data on-the-fly using our Topic management capability.

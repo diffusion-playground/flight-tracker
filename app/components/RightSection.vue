@@ -8,37 +8,15 @@
             <img src="~/assets/images/deliver-flow.svg"/>            
           </div>
           <div class="right-column">
-            <div class="mobile-friendly" />
-            <p class="flow-title">Flight Tracker</p>
+            <div :class="sectionIconClass" />
+            <p class="flow-title">{{title}}</p>
             <p class="flow-subtitle">Web client</p>
           </div>
         </div>        
         <IncomingData :value="incomingDiffusionDataAll" elClass="incoming-green" v-if="showAll" />
         <IncomingData :value="incomingDiffusionDataByAirline" elClass="incoming-green" v-else />
         <client-only>
-          <FlightTracker 
-              v-bind:options="byAirline" 
-              v-bind:selected="byAirline[1].value"
-              :selectionName="byAirline"
-              :filterFn="filterAirlines"
-            >
-          </FlightTracker>
-          <hr>
-          <FlightTracker 
-            v-bind:options="byAltitude" 
-            v-bind:selected="byAltitude[1].value"
-            :selectionName="byAltitude"
-            :filterFn="filterAltitude"
-          >
-          </FlightTracker>
-          <hr>
-          <FlightTracker  
-            v-bind:options="bySpeed" 
-            v-bind:selected="bySpeed[1].value"
-            :selectionName="bySpeed"
-            :filterFn="filterSpeed"
-          >
-          </FlightTracker>
+          <NbaEvents />
         </client-only>
       </div>
 </template>
@@ -160,6 +138,12 @@ export default ({
                 return 100 - this.$store.state.flights.allAirlinesDataSavingPercentage
             }
             return 100 - this.$store.state.flights.byAirlineDataSavingPercentage
+        },
+        title() {
+          return this.$store.state.app.config ? this.$store.state.app.config.getDeliverAssets().text : ''
+        },
+        sectionIconClass() {
+          return this.$store.state.app.config ? this.$store.state.app.config.getDeliverAssets().iconClass : ''
         }
     }
 })

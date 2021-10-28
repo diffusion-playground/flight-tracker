@@ -5,8 +5,8 @@
         </SectionHeader>
         <div class="d-end-flex consume-flow">
           <div class="left-column consume-title">
-            <div class="plane" />
-            <p class="flow-title">Flight Tracking</p>
+            <div :class="sectionIconClass" />
+            <p class="flow-title">{{title}}</p>
             <p class="flow-subtitle">JSON Stream</p>
           </div>
           <div class="right-column">
@@ -22,8 +22,14 @@
 export default ({
     computed: {
         incomingDataSourceData() {
-        return this.$store.state.flights.incomingDataSourceData.toLocaleString('en')  
+          return this.$store.state.flights.incomingDataSourceData.toLocaleString('en')  
         },
+        title() {
+          return this.$store.state.app.config ? this.$store.state.app.config.getConsumeAssets().text : ''
+        },
+        sectionIconClass() {
+          return this.$store.state.app.config ? this.$store.state.app.config.getConsumeAssets().iconClass : ''
+        }
     }
 })
 </script>

@@ -7,8 +7,9 @@ export default class FlightTrackerTree {
         this.isGenerated = false
         this.subscribeCallback = null
         this.selectedNode = null
-        this.nonCollapsiblePaths = ['opensky-network.org', 'REST']
-        this.initiallyCollapsed = ['American', 'Delta', 'Private', 'Skywest', 'Southwest', 'United', 'all', 'True', 'False']
+        this.nonCollapsiblePaths = ['nba', 'sports', 'REST']
+        this.initiallyCollapsed = []
+        this.leafNodeClass = 'regular'
     }
 
     createTreeFragmentRootNode = () => {
@@ -24,7 +25,7 @@ export default class FlightTrackerTree {
     }
 
     showTreeFromData = results => {        
-        this.processNodes(results.map(dryResult => {            
+        this.processNodes(results.map(dryResult => {                        
             return {
                 path: dryResult.path(),
                 pathItems: dryResult.path().split('/'),
@@ -42,7 +43,7 @@ export default class FlightTrackerTree {
         
         this.collapseInitial()
 
-        this.selectPath('/REST/opensky-network.org')
+        this.selectPath('/REST/sports/nba/events')
 
         return this
     }
@@ -59,20 +60,22 @@ export default class FlightTrackerTree {
 
     processNodes = nodes => {        
         for (const node of nodes) {
-            this.processNode(null, node.pathItems)
+            this.processNode(null, node)
         }        
         this.setLeafNodesIcon()
     }
 
     setLeafNodesIcon = () => {
-        [...this.treeRootEl.querySelectorAll('[data-is-leaf="true"] > a > span')]
+        [...this.treeRootEl.querySelectorAll('[data-is-leaf="true"] > a > div:first-child')]
         .map(item => {
             item.classList.remove('expand')
-            item.classList.add('plane')
+            item.classList.remove('collapse')
+            item.classList.add(this.leafNodeClass)
         })
     }
 
-    processNode = (parentNode, items, idx = 0, basePath = '', indent = 0.25) => {
+    processNode = (parentNode, node, idx = 0, basePath = '', indent = 0.25) => {
+        const items = node.pathItems
         const isRoot = !parentNode ? true: false
         parentNode = parentNode || this.treeRootEl        
         if (!items[idx]) {
@@ -82,23 +85,24 @@ export default class FlightTrackerTree {
         let foundNode = this.findNodeByPath(basePath, parentNode)
         if (!foundNode) {         
             parentNode.dataset.isLeaf = false   
-            foundNode = this.addNode(basePath, items[idx], parentNode, indent, isRoot)
+            foundNode = this.addNode(basePath, items[idx], parentNode, indent, isRoot, node.value)
         }        
-        this.processNode(foundNode, items, idx + 1, basePath, indent + 0.25)
+        this.processNode(foundNode, node, idx + 1, basePath, indent + 0.25)
     }
 
-    addNode = (nodePath, nodeName, parentNode, indent = 0.25, isRoot = true) => {
+    addNode = (nodePath, nodeName, parentNode, indent = 0.25, isRoot = true, value = '{}') => {
         const newFragmentNode = document.createElement('div');
         newFragmentNode.classList.add('topic-node', 'isTreeTopic', this.getNodeType(isRoot), 'd-block');
         const collapsableClass = (this.nonCollapsiblePaths.includes(nodeName)) ? 'not-collapsable' : 'collapsable'
         newFragmentNode.classList.add(collapsableClass)
-        const initialliCollapsedClass = (this.initiallyCollapsed.includes(nodeName)) ? 'icollapsed' : 'iexpanded'
+        const initialliCollapsedClass = 'iCollapsed' // this.initiallyCollapsed.includes(nodeName) ? 'icollapsed' : 'iexpanded'
         newFragmentNode.classList.add(initialliCollapsedClass)
         newFragmentNode.dataset.path = nodePath
         newFragmentNode.dataset.isLeaf = true
+        newFragmentNode.dataset.value = JSON.stringify(value)
         newFragmentNode.style.marginLeft = `${indent}rem`
-        const icon = '<span class="icon expand"></span>'
-        newFragmentNode.innerHTML = `<a href="#" class="text-decoration-none">${icon} ${nodeName}</a>`
+        const icon = '<div class="icon expand"></div>'
+        newFragmentNode.innerHTML = `<a href="#" class="text-decoration-none">${icon} <div>${nodeName}</div></a>`
         parentNode.appendChild(newFragmentNode);
         return newFragmentNode;
     }
@@ -146,7 +150,7 @@ export default class FlightTrackerTree {
         [...parent.querySelectorAll(':scope > div.isTreeTopic')]
         .map(childNode => this.toggleChildNode(childNode))        
 
-        this.toggleTreeIcon(parent.querySelector(':scope span.icon'))
+        this.toggleTreeIcon(parent.querySelector(':scope div.icon'))
     }
 
     toggleChildNode = childNode => {
@@ -160,7 +164,7 @@ export default class FlightTrackerTree {
     }
 
     toggleTreeIcon = icon => {
-        if (icon && !icon.classList.contains('plane')) {
+        if (icon && !icon.classList.contains('plane') && !icon.classList.contains('regular')) {
             if (icon.classList.contains('expand')) {
                 icon.classList.remove('expand')
                 icon.classList.add('collapse');

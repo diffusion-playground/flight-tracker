@@ -26,17 +26,28 @@ export default {
     methods: {
         async show() {
             if (!this.treeLoaded) {
-                const results = await this.$diffusionService.fetchInitialValues('?REST//')                
+                //const results = await this.$diffusionService.fetchInitialValues('?ESPN/nba-scoreboard/events//')
+                const results = await this.$diffusionService.fetchTreeTopics('?REST/sports/nba/events//')
+                console.log(results)
                 this.topicsTree = new FlightTrackerTree('#topicsTree')
                             .setSubscribeCallback(data => this.onSubscribe(data))
                             .showTreeFromData(results)                
                 this.treeLoaded = true
             }
         },
-        onSubscribe(data) {                        
+        async onSubscribe(data) {                        
+            console.log(data)
             this.currentSubscribedPath = data.path.trim()
-            this.$refs.topicValue.setTopicValue(this.currentSubscribedPath)
+            
+            const value = await this.$diffusionService.fetchTopicValue(data.path)            
+
+            this.$refs.topicValue.setTopicValueFromData(
+                value.length > 0 ? 
+                    value[0].value().get() 
+                    : JSON.parse('{ "value":"No Value" }')
+            )
         }
+
     }
 }
 </script>

@@ -12,7 +12,7 @@ export default ({
     },
     computed: {
         flights() {
-            return JSON.stringify(this.$store.state.flights.flightStates);
+            return JSON.stringify(this.$store.state.nba.events);
         }
     }
 })

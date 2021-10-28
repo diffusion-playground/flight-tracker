@@ -256,7 +256,7 @@ html {
     margin-bottom: 0px;
 }
 
-div.plane, div.mobile-friendly {
+div.plane, div.mobile-friendly, div.sports {
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M21 16V14L13 9V3.5C13 2.67 12.33 2 11.5 2C10.67 2 10 2.67 10 3.5V9L2 14V16L10 13.5V19L8 20.5V22L11.5 21L15 22V20.5L13 19V13.5L21 16Z' fill='%23203C71'/%3e%3c/svg%3e"); 
     width: 24px;
     height: 24px;    
@@ -267,6 +267,14 @@ div.plane, div.mobile-friendly {
 
 div.mobile-friendly {
     background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.99994 1H18.9999C20.0999 1 20.9999 1.9 20.9999 3V21C20.9999 22.1 20.0999 23 18.9999 23H8.99994C7.89994 23 6.99994 22.1 6.99994 21V18H8.99994V20H18.9999V4H8.99994V6H6.99994V3C6.99994 1.9 7.89994 1 8.99994 1ZM4.45994 10.92L7.00994 13.47L12.9199 7.54L14.1899 8.81L6.99994 16L3.18994 12.19L4.45994 10.92Z' fill='%231C376C'/%3E%3C/svg%3E%0A");    
+}
+
+div.sports {
+    background-image: url('~assets/images/sports-icon.png');
+    background-repeat: no-repeat;
+    background-position:center;
+    width: 35px;
+    height: 38px;    
 }
 
 .incoming-data {
@@ -370,7 +378,8 @@ a:hover {
 
 .tree-section {
     border: 1px solid #d3d3d3;
-    padding: 5px
+    padding: 5px;
+    overflow: auto;
 }
 
 .topic-container .topic-node {
@@ -398,6 +407,12 @@ a:hover {
 .topic-node a span.plane {    
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='20' height='20' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M21 16V14L13 9V3.5C13 2.67 12.33 2 11.5 2C10.67 2 10 2.67 10 3.5V9L2 14V16L10 13.5V19L8 20.5V22L11.5 21L15 22V20.5L13 19V13.5L21 16Z' fill='%23203C71'/%3e%3c/svg%3e"); 
     transform: rotate(45deg);
+    width: 20px;
+    height: 20px;
+}
+
+.topic-node a div.regular {    
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 0 24 24' width='24px' fill='%23000000'%3E%3Cpath d='M0 0h24v24H0V0z' fill='none'/%3E%3Cpath d='M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z'/%3E%3C/svg%3E");
     width: 20px;
     height: 20px;
 }
@@ -440,4 +455,8 @@ a:hover {
 
 .d-none {
     display: none;
+}
+
+.nba-events {
+    list-style: none;
 }
