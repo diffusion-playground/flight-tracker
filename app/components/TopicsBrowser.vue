@@ -26,8 +26,7 @@ export default {
     methods: {
         async show() {
             if (!this.treeLoaded) {
-                //const results = await this.$diffusionService.fetchInitialValues('?ESPN/nba-scoreboard/events//')
-                const results = await this.$diffusionService.fetchTreeTopics('?REST/sports/nba/events//')
+                const results = await this.$diffusionService.fetchTreeTopics('?rest/sports/nba/events//')
                 console.log(results)
                 this.topicsTree = new FlightTrackerTree('#topicsTree')
                             .setSubscribeCallback(data => this.onSubscribe(data))

@@ -1,7 +1,7 @@
 <template>
     <div class="col main-col">
         <SectionHeader title="Consume"  subTitle="">
-          Consumer real-time events from <a href='#' v-tooltip.bottom-center="`opensky-network.org/api/states/all`">Source</a> using REST API
+          Consumer real-time events from <a href='#' v-tooltip.bottom-center="`${toolTip}`">Source</a> using REST API
         </SectionHeader>
         <div class="d-end-flex consume-flow">
           <div class="left-column consume-title">
@@ -29,6 +29,9 @@ export default ({
         },
         sectionIconClass() {
           return this.$store.state.app.config ? this.$store.state.app.config.getConsumeAssets().iconClass : ''
+        },
+        toolTip() {
+          return this.$store.state.app.config ? this.$store.state.app.config.getConsumeAssets().toolTip : ''
         }
     }
 })

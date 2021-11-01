@@ -1,10 +1,11 @@
 export default $store => ({
     init() {                
         this.pageAssets = {
-            title: 'Flight Tracker Application',
+            title: 'Flight Tracker Application',            
             consume: {
                 iconClass: 'plane',
-                text: 'Flight Tracking'
+                text: 'Flight Tracking',
+                toolTip: 'opensky-network.org/api/states/all',
             },
             deliver: {
                 iconClass: 'mobile-friendly',

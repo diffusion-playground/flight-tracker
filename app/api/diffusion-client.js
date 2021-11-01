@@ -138,11 +138,10 @@ export default class Diffusion {
     fetchTopicValue = this.fetchInitialValues
 
     fetchTopicWithNoValues = topic => {
-        return this.session.fetchRequest()            
-            .fetch(topic)
+        return this.session.fetchRequest()                        
+            .fetch(topic)            
             .then(function(fetchResult) {
                 const results = fetchResult.results();
-                //console.log("Fetch Request returned "+results.length+" topics", results);
                 return results
             });
     }

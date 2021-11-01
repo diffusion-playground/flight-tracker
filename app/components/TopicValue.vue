@@ -16,7 +16,7 @@ export default ({
     methods: {
         ...mapActions('nba', ['getTopicValue', 'getTreeTopicValue']),
         async setTopicValue(topicPath) {    
-            if (topicPath === '/REST/sports/nba') {
+            if (topicPath === '/rest/sports/nba') {
                 this.currentValue = await this.getTreeTopicValue()
                 return
             }

@@ -10,6 +10,7 @@ export default class FlightTrackerTree {
         this.nonCollapsiblePaths = ['nba', 'sports', 'REST']
         this.initiallyCollapsed = []
         this.leafNodeClass = 'regular'
+        this.levelInitiallyCollapsed = 4
     }
 
     createTreeFragmentRootNode = () => {
@@ -25,13 +26,13 @@ export default class FlightTrackerTree {
     }
 
     showTreeFromData = results => {        
-        this.processNodes(results.map(dryResult => {                        
-            return {
-                path: dryResult.path(),
-                pathItems: dryResult.path().split('/'),
-                value: dryResult.value()? dryResult.value().get() : ''
-            }            
-        }))
+        this.processNodes(results.map(dryResult => ({
+                    path: dryResult.path(),
+                    pathItems: dryResult.path().split('/'),
+                    value: dryResult.value()? dryResult.value().get() : ''
+                })
+            )
+        )
         
         //Show the tree
         this.topicsRootEl.innerHTML = '';
@@ -43,7 +44,7 @@ export default class FlightTrackerTree {
         
         this.collapseInitial()
 
-        this.selectPath('/REST/sports/nba/events')
+//        this.selectPath('/REST/sports/nba/events')
 
         return this
     }
@@ -74,7 +75,7 @@ export default class FlightTrackerTree {
         })
     }
 
-    processNode = (parentNode, node, idx = 0, basePath = '', indent = 0.25) => {
+    processNode = (parentNode, node, idx = 0, basePath = '', indent = 0.25, level = 0) => {
         const items = node.pathItems
         const isRoot = !parentNode ? true: false
         parentNode = parentNode || this.treeRootEl        
@@ -85,18 +86,19 @@ export default class FlightTrackerTree {
         let foundNode = this.findNodeByPath(basePath, parentNode)
         if (!foundNode) {         
             parentNode.dataset.isLeaf = false   
-            foundNode = this.addNode(basePath, items[idx], parentNode, indent, isRoot, node.value)
+            foundNode = this.addNode(basePath, items[idx], parentNode, indent, isRoot, node.value, level)
         }        
-        this.processNode(foundNode, node, idx + 1, basePath, indent + 0.25)
+        level++
+        this.processNode(foundNode, node, idx + 1, basePath, indent + 0.25, level)
     }
 
-    addNode = (nodePath, nodeName, parentNode, indent = 0.25, isRoot = true, value = '{}') => {
+    addNode = (nodePath, nodeName, parentNode, indent = 0.25, isRoot = true, value = '{}', level = 0) => {
         const newFragmentNode = document.createElement('div');
         newFragmentNode.classList.add('topic-node', 'isTreeTopic', this.getNodeType(isRoot), 'd-block');
         const collapsableClass = (this.nonCollapsiblePaths.includes(nodeName)) ? 'not-collapsable' : 'collapsable'
         newFragmentNode.classList.add(collapsableClass)
-        const initialliCollapsedClass = 'iCollapsed' // this.initiallyCollapsed.includes(nodeName) ? 'icollapsed' : 'iexpanded'
-        newFragmentNode.classList.add(initialliCollapsedClass)
+        const initiallyCollapsedClass = ((this.initiallyCollapsed.includes(nodeName)) || (level >= this.levelInitiallyCollapsed))? 'icollapsed':'iexpanded'   //this.initiallyCollapsed.includes(nodeName) ? 'icollapsed' : 'iexpanded'
+        newFragmentNode.classList.add(initiallyCollapsedClass)
         newFragmentNode.dataset.path = nodePath
         newFragmentNode.dataset.isLeaf = true
         newFragmentNode.dataset.value = JSON.stringify(value)

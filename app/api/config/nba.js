@@ -1,10 +1,11 @@
 export default $store => ({
     init() {            
         this.pageAssets = {
-            title: 'NBA Scoreboard and Odds',
+            title: 'NBA Scoreboard and Odds',            
             consume: {
                 iconClass: 'sports',
-                text: 'NBA Scoreboard'
+                text: 'NBA Scoreboard',
+                toolTip: 'site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard',
             },
             deliver: {
                 iconClass: 'mobile-friendly',
@@ -17,15 +18,15 @@ export default $store => ({
         return this.pageAssets.title
     },
 
-    getConsumeAssets() {        
+    getConsumeAssets() {
         return this.pageAssets.consume || {}
     },
 
-    getDeliverAssets() {        
+    getDeliverAssets() {
         return this.pageAssets.deliver || {}
     },
 
-    getSavingsPercentage(conditionFn, trueValue, falseValue) {        
+    getSavingsPercentage(conditionFn, trueValue, falseValue) {
         return conditionFn()? trueValue : falseValue
     }
 })
