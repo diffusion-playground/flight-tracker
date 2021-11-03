@@ -9,4 +9,12 @@ export default class Config {
         }
         return new NbaConfig();
     }
+
+    static setAppConfig($store, $config) {
+        $store.commit(
+            'app/setConfig',
+            $config
+        )
+        $store.state.app.config.init($store)
+    }
 }

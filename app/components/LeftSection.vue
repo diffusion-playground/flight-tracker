@@ -14,15 +14,15 @@
           </div>
         </div>
         <IncomingData :value="incomingDataSourceData" elClass="incoming-red" />
-        <FlightPoller></FlightPoller>
+        <DataPoller />
       </div>      
 </template>
 
 <script>
 export default ({
     computed: {
-        incomingDataSourceData() {
-          return this.$store.state.flights.incomingDataSourceData.toLocaleString('en')  
+        incomingDataSourceData() {          
+          return this.$store.state.app.config ? this.$store.state.app.config.getIncommingData(this.$store).toLocaleString('en') : '0'
         },
         title() {
           return this.$store.state.app.config ? this.$store.state.app.config.getConsumeAssets().text : ''

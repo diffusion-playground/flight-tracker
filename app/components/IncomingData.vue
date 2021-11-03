@@ -10,13 +10,8 @@
 export default ({
     props: ['value', 'elClass'],
     computed: {    
-        dataSavingsPercentage() {
-            /* TODO: make this function open for extension, closed for change, taking into account other templates */
-            return this.$store.state.app.config ? this.$store.state.app.config.getSavingsPercentage(
-                () => true,
-                this.$store.state.nba.savingsPercentage,
-                this.$store.state.nba.savingsPercentage
-            ) : 0
+        dataSavingsPercentage() {            
+            return this.$store.state.app.config ? this.$store.state.app.config.getSavingsPercentage(this.$store) : 0
         }
     },
 })

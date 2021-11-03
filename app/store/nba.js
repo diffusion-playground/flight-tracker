@@ -1,6 +1,13 @@
 export const state = () => ({
     events: [],
-    savingsPercentage: 78
+    savingsPercentage: 78,
+    restSavingsPercentage: 22,
+    restFilteredSavingsPercentage: 1,
+    eventStates: [],
+    incomingDataSourceData: 0,
+    incomingDiffusionDataAll: 0,
+    incomingDiffusionDataFiltered: 0,
+    showAll: true
 })
 
 export const mutations = {
@@ -12,9 +19,21 @@ export const mutations = {
         state.events.push(remoteEvent)
       }
     },
+    
     setSavingsPercentage(state, value) {
       state.savingsPercentage = value
-    }
+    },
+    
+    setShowAll (state, value) {
+      state.showAll = value
+    },
+    
+    set (state, events) {
+      state.eventsStates = events
+      state.incomingDataSourceData += JSON.stringify(state.eventsStates).length
+      state.incomingDiffusionDataAll = (state.restSavingsPercentage * state.incomingDataSourceData) / 100
+      state.incomingDiffusionDataFiltered = (state.restFilteredSavingsPercentage * state.incomingDataSourceData) / 100
+    },
 }
 
 export const actions = {

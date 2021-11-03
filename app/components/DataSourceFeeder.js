@@ -1,14 +1,8 @@
 const poll = async ({ fn, validate, interval }) => {
-    console.log('Start poll...');
-    let fileNumber = 2;
+    console.log('Start poll...');    
 
-    const executePoll = async (resolve, reject) => {        
-        const result = await fn(fileNumber);
-        fileNumber++;
-
-        if (validate(result)) {
-            return resolve(result);
-        }
+    const executePoll = async (resolve, reject) => {             
+        const result = await fn();                
 
         setTimeout(executePoll, interval, resolve, reject);        
     };
@@ -30,7 +24,9 @@ export default class DataSourceFeeder {
         }
     }
 
-    static updateDatasource = () => {        
-        this.store.commit('flights/set', this.store.state.diffusion.subscribedFlights)
+    static updateDatasource = () => {                
+        const config = this.store.state.app.config
+        this.store.commit(config.getSourceDataStoreFn(), config.getSourceData(this.store))
+        return
     }
 }

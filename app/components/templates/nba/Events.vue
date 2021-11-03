@@ -3,7 +3,7 @@
         <h3>Select a match</h3>        
         <div class="nba-events">
             <div v-for="event in events" :key="event.id">
-                <NbaEvent :event="event" />
+                <TemplatesNbaEvent :event="event" />
             </div>
         </div>
     </div>

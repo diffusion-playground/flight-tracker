@@ -10,8 +10,21 @@ export default $store => ({
             deliver: {
                 iconClass: 'mobile-friendly',
                 text: 'NBA Scoreboard'
-            }
+            },
+            subscriptions: [
+                {
+                    topicPath: '?ESPN/nba-scoreboard/events/.*',
+                    storeSetFnString: 'nba/setEvent'
+                }
+            ],
+            topicsTree: {
+                topicPath: '?rest/sports/nba/events//',
+                storeSetFnString: 'flights/setTopicsTree'
+            },
+            sourceDataStoreFn: 'nba/set'
         }
+        
+        console.log('NBA Config Initialized')
     },
 
     getTitle() {
@@ -26,7 +39,48 @@ export default $store => ({
         return this.pageAssets.deliver || {}
     },
 
-    getSavingsPercentage(conditionFn, trueValue, falseValue) {
-        return conditionFn()? trueValue : falseValue
+    getSavingsPercentage($store) {
+        return $store.state.nba.savingsPercentage
+    },
+
+    getSubscriptions() {
+        return this.pageAssets.subscriptions
+    },
+
+    getMessageCommitStorages() {
+        return this.pageAssets.subscriptions.map(subscription => subscription.storeSetFnString)
+    },
+
+    getTreeTopicPath() {
+        return this.pageAssets.topicsTree.topicPath
+    },
+    
+    getRawData($store) {        
+        return $store.state.nba.events
+    },
+
+    getSourceData($store) {
+        return $store.state.nba.events
+    },
+
+    getSourceDataStoreFn() {
+        return this.pageAssets.sourceDataStoreFn
+    },
+
+    getIncommingData($store) {
+        return $store.state.nba.incomingDataSourceData
+    },
+
+    getIncommingDataAll($store) {
+        return $store.state.nba.incomingDiffusionDataAll
+    },
+
+    getIncommingDataFiltered($store) {
+        return $store.state.nba.incomingDiffusionDataFiltered
+    },
+
+    getShowAll($store) {
+        return $store.state.nba.showAll
     }
+
 })

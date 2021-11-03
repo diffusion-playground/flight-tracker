@@ -1,11 +1,11 @@
 <template>
     <div class="flight-map">
-        <FTSelect
+        <TemplatesFlightsFTSelect
             :options="options"
             :selected="selected"
             :name="thisSelect"
             v-on:valuechanged="onSelectChanged"
-        ></FTSelect>
+        ></TemplatesFlightsFTSelect>
         <div class="map-wrap">        
             <client-only>
                 <l-map 
@@ -49,7 +49,7 @@
         </div>
         <div class="table-wrap">
             <client-only>
-                <FlightsTable :flights="flights" />
+                <TemplatesFlightsTable :flights="flights" />
             </client-only>
         </div>
     </div>
@@ -61,8 +61,8 @@
             flights() {
                 const computed = (
                                     this.selectedFilter !== '--ALL--' ?
-                                    this.$store.state.diffusion.subscribedFlights.filter(flight => this.filterFn(flight, this.selectedFilter))
-                                    : this.$store.state.diffusion.subscribedFlights.filter(flight => this.filterAllFn(flight))
+                                    this.$store.state.flights.subscribedFlights.filter(flight => this.filterFn(flight, this.selectedFilter))
+                                    : this.$store.state.flights.subscribedFlights.filter(flight => this.filterAllFn(flight))
                                 ).slice(0,100)
                 return computed
             }

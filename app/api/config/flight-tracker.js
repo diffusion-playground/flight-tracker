@@ -10,26 +10,78 @@ export default $store => ({
             deliver: {
                 iconClass: 'mobile-friendly',
                 text: 'Flight Tracker'
-            }
+            },
+            subscriptions: [
+                {
+                    topicPath: '?REST/opensky-network.org/airlines//',
+                    storeSetFnString: 'flights/setFlight'
+                }
+            ],
+            topicsTree: {
+                topicPath: '?REST//',
+                storeSetFnString: 'flights/setTopicsTree'
+            },
+            sourceDataStoreFn: 'flights/set'
         }
+        console.log('Flights Tracker Config Initialized')
     },
 
     getTitle() {
         return this.pageAssets.title
     },
 
-    getConsumeAssets() {        
+    getConsumeAssets() {
         return this.pageAssets.consume || {}
     },
 
-    getDeliverAssets() {        
+    getDeliverAssets() {
         return this.pageAssets.deliver || {}
     },
 
-    getSavingsPercentage() {
-        if (this.store.state.flights.showAll) {
-            return 100 - this.store.state.flights.allAirlinesDataSavingPercentage
+    getSavingsPercentage($store) {        
+        if ($store.state.flights.showAll) {
+            return 100 - $store.state.flights.allAirlinesDataSavingPercentage
         }
-        return 100 - this.store.state.flights.byAirlineDataSavingPercentage        
+        return 100 - $store.state.flights.byAirlineDataSavingPercentage        
+    },
+
+    getSubscriptions() {
+        return this.pageAssets.subscriptions
+    },
+
+    getMessageCommitStorages() {
+        return this.pageAssets.subscriptions
+    },
+
+    getTreeTopicPath() {
+        return this.pageAssets.topicsTree.topicPath
+    },
+
+    getRawData($store) {
+        return $store.state.flights.subscribedFlights
+    },
+
+    getSourceData($store) {
+        return $store.state.flights.subscribedFlights
+    },
+
+    getSourceDataStoreFn() {
+        return this.pageAssets.sourceDataStoreFn
+    },
+
+    getIncommingData($store) {
+        return $store.state.flights.incomingDataSourceData
+    },
+
+    getIncommingDataAll($store) {
+        return $store.state.flights.incomingDiffusionDataAll
+    },
+
+    getIncommingDataFiltered($store) {
+        return $store.state.flights.incomingDiffusionDataByAirline
+    },
+
+    getShowAll($store) {
+        return $store.state.flights.showAll
     }
 })

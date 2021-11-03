@@ -45,13 +45,30 @@ export default $store => ({
         
         this.isConnected = true;
         
-        this.diffusionClient.subscribe({topicPath: '?ESPN/nba-scoreboard/events/.*'})
+        let diffusionClient = this.diffusionClient
 
-        //this.diffusionClient.subscribe({topicPath: 'REST/opensky-network.org', onValueCallback: this.onSourceDataMessage.bind(this)})
+        this.subscriptions = this.config.getSubscriptions();
+
+        this.subscriptions.map( 
+            subscription => diffusionClient.subscribe({topicPath: subscription.topicPath})
+        )
 
         if (this.onConnectedCallback) {
             this.onConnectedCallback();
         }
+    },
+
+    switchSubscriptions(oldConfig, newConfig) {
+        console.log('Switching Subscriptions')
+        let diffusionClient = this.diffusionClient
+        
+        // Unsubscribe previous
+        oldConfig.getSubscriptions().map(subscription => diffusionClient.unsubscribe(subscription.topicPath));
+        
+        // Subscribe new        
+        newConfig.getSubscriptions().map( 
+            subscription => diffusionClient.subscribe({topicPath: subscription.topicPath})
+        )
     },
 
     replaceSubscription(topicPath, isLeaf, callbackFn) {
@@ -67,10 +84,16 @@ export default $store => ({
     },
         
     onDiffusionMessage(message, topic) {
-        console.log('OnDiffusioMessage: ', topic, message)
-        this.store.commit('nba/setEvent', message)
-        //this.store.commit('diffusion/setTopic', topic.trim())        
-        //this.store.commit('diffusion/set', message)        
+        console.log('OnDiffusioMessage: ', topic, message, this.config.getMessageCommitStorages())
+        this.config.getMessageCommitStorages().map(storageFn => {
+            if (typeof storageFn === 'object' ) {
+                console.log('Storing object: ', storageFn)
+                this.store.commit(storageFn.storeSetFnString, message)
+                return
+            }
+            console.log('Storing string: ', storageFn)
+            this.store.commit(storageFn, message)
+        })
     },
 
     async onSourceDataMessage(topic, specification, newValue, oldValue) {        
@@ -113,6 +136,10 @@ export default $store => ({
 
     setStore(store) {
         this.store = store
+    },
+
+    setConfig(config) {
+        this.config = config;
     },
 
     async fetchInitialValues(topic) {

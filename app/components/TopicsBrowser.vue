@@ -25,14 +25,14 @@ export default {
     }, 
     methods: {
         async show() {
-            if (!this.treeLoaded) {
-                const results = await this.$diffusionService.fetchTreeTopics('?rest/sports/nba/events//')
-                console.log(results)
-                this.topicsTree = new FlightTrackerTree('#topicsTree')
-                            .setSubscribeCallback(data => this.onSubscribe(data))
-                            .showTreeFromData(results)                
-                this.treeLoaded = true
-            }
+            
+            const results = await this.$diffusionService.fetchTreeTopics(this.$store.state.app.config.getTreeTopicPath())
+            console.log(results)
+            this.topicsTree = new FlightTrackerTree('#topicsTree')
+                        .setSubscribeCallback(data => this.onSubscribe(data))
+                        .showTreeFromData(results)                
+            this.treeLoaded = true
+            
         },
         async onSubscribe(data) {                        
             console.log(data)

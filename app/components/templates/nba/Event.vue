@@ -1,11 +1,11 @@
 <template>    
-    <div>
+    <div v-if="event.competitions && event.competitions.length > 0">
         <a class="nba-event" href="#" @click="onEventClick">        
-            <NbaListTeam :competitor="event.competitions[0].competitors[1]" />             
-            <NbaListTeam :competitor="event.competitions[0].competitors[0]" :isAt="true" />
-            <EventShortDetail :eventType="event.status.type" />
+            <TemplatesNbaListTeam :competitor="event.competitions[0].competitors[1]" />             
+            <TemplatesNbaListTeam :competitor="event.competitions[0].competitors[0]" :isAt="true" />
+            <TemplatesNbaEventShortDetail :eventType="event.status.type" />
         </a>
-        <NbaEventExtendedInfo v-if="showExtendedInfo" :event="event" />
+        <TemplatesNbaEventExtendedInfo v-if="showExtendedInfo" :event="event" />
     </div>
 </template>
 <script>
@@ -27,6 +27,7 @@ export default ({
         },
         updateSavingsPercentage() {            
             this.$store.commit('nba/setSavingsPercentage', document.querySelectorAll('.extended-info').length > 0 ? 99 : 78)
+            this.$store.commit('nba/setShowAll', document.querySelectorAll('.extended-info').length > 0 ? false : true)
         }
     }
 })

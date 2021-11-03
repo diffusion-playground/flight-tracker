@@ -1,8 +1,8 @@
 <template>
-  <div>    
+  <div>       
     <div class="d-centered-flex">
       <Header />
-    </div>
+    </div>    
     <div class="d-centered-flex">
       <!-- CONSUME -->
       <LeftSection /> 
@@ -45,22 +45,16 @@ export default {
 
         setPolledMockData(flights) {
           this.$store.commit('flights/set', flights);
-        },
-        initAppConfig(name) {
-          this.$store.commit(
-            'app/setConfig',
-            this.$store.state.app.template === 'nba'?
-            this.$NBAConfig : this.$flightTrackerConfig
-          )
-          this.$store.state.app.config.init(this.$store)
         }
     },
   async mounted() {
-    this.$diffusionService.setTopicsStore(this.$store.state.topics)
-    //this.$diffusionService.setFlightsStore(this.$store.state.flights)
+    /* Sets app Template's config. At first we set it to NBA Template */
+    !this.$store.state.app.config ? Config.setAppConfig(this.$store, this.$NBAConfig) : null
+
+    this.$diffusionService.setTopicsStore(this.$store.state.topics)    
     this.$diffusionService.setDiffusionStore(this.$store.state.diffusion)
-    this.$diffusionService.setStore(this.$store)     
-    this.initAppConfig('nba')
+    this.$diffusionService.setStore(this.$store)
+    this.$diffusionService.setConfig(this.$store.state.app.config)
 
     /** Connect to DIFFUSION */    
     this.$diffusionService.connect(

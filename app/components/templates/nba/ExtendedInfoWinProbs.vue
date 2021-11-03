@@ -22,10 +22,18 @@ export default ({
     },
     computed: {
         awayWinPercentage() {
-            return this.getPercentage(parseFloat(this.competition.situation.lastPlay.probability.awayWinPercentage)).toFixed(2)            
+            try {
+                return this.getPercentage(parseFloat(this.competition.situation.lastPlay.probability.awayWinPercentage)).toFixed(2)            
+            } catch (e) {
+                return 0.00
+            }
         },
         homeWinPercentage() {
-            return this.getPercentage(parseFloat(this.competition.situation.lastPlay.probability.homeWinPercentage)).toFixed(2)            
+            try {
+                return this.getPercentage(parseFloat(this.competition.situation.lastPlay.probability.homeWinPercentage)).toFixed(2)            
+            } catch (e) {
+                return 0.00
+            }
         }
     }
 })

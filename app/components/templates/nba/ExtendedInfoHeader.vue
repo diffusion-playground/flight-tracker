@@ -1,8 +1,8 @@
 <template>
     <div class="competitors-header">        
-        <ExtendedInfoCompetitor :competitor="competitors[1]" :isNotAt="true" />
-        <ExtendedInfoScore :competition="competition" />
-        <ExtendedInfoCompetitor :competitor="competitors[0]" :isAt="true"/>
+        <TemplatesNbaExtendedInfoCompetitor :competitor="competitors[1]" :isNotAt="true" />
+        <TemplatesNbaExtendedInfoScore :competition="competition" />
+        <TemplatesNbaExtendedInfoCompetitor :competitor="competitors[0]" :isAt="true"/>
     </div>
 </template>
 <script>
