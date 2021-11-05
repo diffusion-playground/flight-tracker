@@ -4,11 +4,14 @@
             Transform the event-data using <a :href="dslLink" target="_blank">DSL (a declarative language)</a> in Diffusion.
         </SectionHeader>
             
-        <CloudOnPremiseToggle />
+        <!--<CloudOnPremiseToggle />-->
+        <DiffusionEnabledToggle />
             
+        <div v-if="diffusionEnabled" class="wrangling-text">
         <p class="flow-arrow-right-text">All real-time data wrangling is done by Diffusion on-the-fly, so that you only publish what’s needed and not all your event data stream </p>        
         
         <DButton :dhref="`#`" :dtext="`Show Topic Tree`" :dclass="`btn mr-2 btn-primary`" @dclick="onShowTopicsTree" v-if="diffusionConnected" />        
+        </div>
         <Modal v-show="showModal" @close-modal="showModal = false" :width="51" :height="700">
             <div class="topic-tree-intro">
                 <p>
@@ -31,7 +34,10 @@ export default ({
     computed: {
         diffusionConnected() {
             return this.$store.state.diffusion.connected
-        } 
+        },
+        diffusionEnabled() {
+            return this.$store.state.diffusion.diffusionEnabled
+        },
     },
     data() {
         return {
@@ -85,5 +91,11 @@ export default ({
 
 .open-tree-btn:hover {
     color: #FFF !important;
+}
+.wrangling-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
 }
 </style>

@@ -3,7 +3,8 @@ export const state = () => ({
     connected: false,
     lastTopicReceived: '',
     lastMessage: {},
-    topicsTree: []
+    topicsTree: [],
+    diffusionEnabled: false,
 })
 
 export const mutations = {
@@ -24,6 +25,9 @@ export const mutations = {
     },
     setTopicsTree(state, topicsTree) {
       state.topicsTree = topicsTree
+    },
+    setDiffusionEnabled(state, value) {
+      state.diffusionEnabled = value
     }
   }
 

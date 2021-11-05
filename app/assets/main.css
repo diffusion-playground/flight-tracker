@@ -325,11 +325,15 @@ div.sports {
     width: 10%;
 }
 
-.data-savings {
+.data-savings, .no-data-savings {
     color: green;
     font-weight: 700;
     font-size: 1rem !important;
     margin-bottom: 0px;
+}
+
+.no-data-savings {
+    color: red;
 }
 
 .diffusion-logo {
