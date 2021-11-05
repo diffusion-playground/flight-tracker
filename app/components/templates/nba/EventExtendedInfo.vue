@@ -25,6 +25,6 @@ export default ({
 }
 
 .extended-info:last-child {
-    border-bottom: 3px solid lightgray;
+    border-bottom: 3px solid darkslategray;
 }
 </style>

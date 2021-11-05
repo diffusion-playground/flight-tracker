@@ -19,7 +19,7 @@ export default ({
 </script>
 <style scoped>
 h3 {
-    margin: 44px 0 5px;
+    margin: 0 0 5px;
     color: #1C376C;
 }
 .nba-events {    

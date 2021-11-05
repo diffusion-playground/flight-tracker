@@ -1,9 +1,10 @@
 <template>
     <div class="col main-col">
         <SectionHeader title="Consume"  subTitle="">
-          Consumer real-time events from <a href='#' v-tooltip.bottom-center="`${toolTip}`">Source</a> using REST API
+          <p>Easily publish realtime events from any <a href='#' v-tooltip.bottom-center="`${toolTip}`">Source</a> using our Adapters and SDK.</p>
+          <p>Hook any data feed into Diffusion and monitor its health in realtime.</p>
         </SectionHeader>
-        <div class="d-end-flex consume-flow">
+        <div class="d-end-flex consume-flow" :style="{'margin-top':'10px'}">
           <div class="left-column consume-title">
             <div :class="sectionIconClass" />
             <p class="flow-title">{{title}}</p>
@@ -13,7 +14,7 @@
             <img src="~/assets/images/consume-flow.svg"/>
           </div>
         </div>
-        <IncomingData :value="incomingDataSourceData" elClass="incoming-red" />
+        <IncomingDataFull :value="incomingDataSourceData" elClass="incoming-red" />
         <DataPoller />
       </div>      
 </template>

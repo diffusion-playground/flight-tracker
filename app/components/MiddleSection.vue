@@ -1,17 +1,17 @@
 <template>
     <div class="main-col middle no-border" style="width: 20%">
         <SectionHeader title="Enrich" subTitle="">
-            Transform the event-data using <a :href="dslLink" target="_blank">DSL (a declarative language)</a> in Diffusion.
+            <p>Breakdown your data and make it easy to navigate through.</p>
         </SectionHeader>
             
         <!--<CloudOnPremiseToggle />-->
-        <DiffusionEnabledToggle />
-            
-        <div v-if="diffusionEnabled" class="wrangling-text">
-        <p class="flow-arrow-right-text">All real-time data wrangling is done by Diffusion on-the-fly, so that you only publish what’s needed and not all your event data stream </p>        
-        
-        <DButton :dhref="`#`" :dtext="`Show Topic Tree`" :dclass="`btn mr-2 btn-primary`" @dclick="onShowTopicsTree" v-if="diffusionConnected" />        
-        </div>
+        <!-- <DiffusionEnabledToggle /> -->
+                                        
+        <p :style="{'text-align':'center', 'width':'75%'}">Click here to view your data organized with Diffusion Topic Tree.</p>
+        <DButton :dhref="`#`" :dtext="`Show Topic Tree`" :dclass="`btn mr-2 btn-primary`" @dclick="onShowTopicsTree" v-if="diffusionConnected" />
+
+        <img class="diffusion-enabled" src="~/assets/images/diffusion-enabled.png" />
+
         <Modal v-show="showModal" @close-modal="showModal = false" :width="51" :height="700">
             <div class="topic-tree-intro">
                 <p>
@@ -97,5 +97,10 @@ export default ({
     flex-direction: column;
     justify-content: center;
     margin-top: 20px;
+}
+
+.diffusion-enabled, .diffusion-disabled {
+    max-width: 365px;
+    margin-top: 74px;
 }
 </style>

@@ -5,7 +5,7 @@
             <TemplatesNbaListTeam :competitor="event.competitions[0].competitors[0]" :isAt="true" />
             <TemplatesNbaEventShortDetail :eventType="event.status.type" />
         </a>
-        <TemplatesNbaEventExtendedInfo v-if="showExtendedInfo" :event="event" />
+        <TemplatesNbaEventExtendedInfo :event="event" />
     </div>
 </template>
 <script>

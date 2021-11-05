@@ -7,7 +7,8 @@
 
         <TemplatesSelectorBar v-on:templatechanged="onTemplateChanged" />   
 
-        <h3 :style="{'margin-top': '10px', 'color':'#1C376C', 'font-size':'28px'}">{{appTitle}}</h3>
+        <h3 class="app-title">{{appTitle}}</h3>
+
         <p>A sample web application to <b>consume</b>, <b>enrich</b> and <b>deliver</b> real-time events using Diffusion </p>
     </div>
 </template>
@@ -26,3 +27,10 @@ export default ({
     }
 })
 </script>
+<style scoped>
+.app-title {
+    margin-top: 2.5rem;
+    color: #1C376C;
+    font-size: 28px;
+}
+</style>

@@ -4,7 +4,7 @@ export const state = () => ({
     lastTopicReceived: '',
     lastMessage: {},
     topicsTree: [],
-    diffusionEnabled: false,
+    diffusionEnabled: true,
 })
 
 export const mutations = {

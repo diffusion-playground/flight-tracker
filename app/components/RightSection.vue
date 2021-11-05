@@ -1,7 +1,8 @@
 <template>
     <div class="col main-col right">
         <SectionHeader title="Deliver" subTitle="">
-          Deliver the precise event-data required by the <a href="https://www.pushtechnology.com/developers/cloud/latest/#sdk" target="_blank">client Application</a>
+          <p>Millions of client applications can subscribe in realtime to any event message using our Adapters and SDK.</p>
+          <p>Diffusion automatic topic tree, makes fine-grained subscription very simple</p>
         </SectionHeader>
         <div class="d-start-flex deliver-flow">
           <div class="left-column consume-title">
@@ -13,9 +14,8 @@
             <p class="flow-subtitle">Web client</p>
           </div>
         </div>        
-        <IncomingData :value="incomingDiffusionDataAll" elClass="incoming-green" v-if="showAll && diffusionEnabled" />
-        <IncomingData :value="incomingDiffusionDataFiltered" elClass="incoming-green" v-if="!showAll && diffusionEnabled" />
-        <IncomingData :value="incommingDiffusionDataNoSavings" :showLegend="true" elClass="incoming-red" v-if="!diffusionEnabled" />
+
+        <IncomingDataFull :value="incomingDiffusionDataAll" elClass="incoming-green" v-if="showAll && diffusionEnabled" />                
         
         <div :class="templateHolderClass">
           <TemplatesNbaEvents v-if="currentComponent === 'TemplatesNbaEvents'" />
