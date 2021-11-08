@@ -26,7 +26,6 @@ export default ({
             setTimeout(() => { this.updateSavingsPercentage() }, 500)
         },
         updateSavingsPercentage() {            
-            this.$store.commit('nba/setSavingsPercentage', document.querySelectorAll('.extended-info').length > 0 ? 99 : 78)
             this.$store.commit('nba/setShowAll', document.querySelectorAll('.extended-info').length > 0 ? false : true)
         }
     }

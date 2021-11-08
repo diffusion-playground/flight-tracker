@@ -15,7 +15,8 @@
           </div>
         </div>        
 
-        <IncomingDataFull :value="incomingDiffusionDataAll" elClass="incoming-green" v-if="showAll && diffusionEnabled" />                
+        <IncomingDataFull :value="incomingDiffusionDataAll" elClass="incoming-green" v-if="showAll && diffusionEnabled" />
+        <IncomingDataFull :value="incomingDiffusionDataFiltered" elClass="incoming-green" v-if="!showAll && diffusionEnabled" />                
         
         <div :class="templateHolderClass">
           <TemplatesNbaEvents v-if="currentComponent === 'TemplatesNbaEvents'" />
@@ -28,7 +29,7 @@
 <script>
 export default ({
     data() {
-        return {}    
+        return { initialValue: 0 }
     },
     methods: {
         
@@ -42,13 +43,7 @@ export default ({
       },
       templateHolderClass() {
         return this.$store.state.diffusion.diffusionEnabled ? 'holder-show' : 'holder-hide'
-      },
-      incomingDiffusionDataAll() {
-        return Math.round(this.$store.state.app.config ? this.$store.state.app.config.getIncommingDataAll(this.$store) : 0).toLocaleString('en')  
-      },
-      incomingDiffusionDataFiltered() {
-        return Math.round(this.$store.state.app.config ? this.$store.state.app.config.getIncommingDataFiltered(this.$store) : 0).toLocaleString('en')
-      },    
+      },          
       incommingDiffusionDataNoSavings() {
         return this.$store.state.app.config ? this.$store.state.app.config.getIncommingData(this.$store).toLocaleString('en') : '0'
       },
@@ -60,6 +55,12 @@ export default ({
       },
       sectionIconClass() {
         return this.$store.state.app.config ? this.$store.state.app.config.getDeliverAssets().iconClass : ''
+      },
+      incomingDiffusionDataAll() {
+          return Math.round(this.$store.state.app.config ? this.$store.state.app.config.getIncommingDataAll(this.$store) : 0).toLocaleString('en')  
+      },
+      incomingDiffusionDataFiltered() {
+          return Math.round(this.$store.state.app.config ? this.$store.state.app.config.getIncommingDataFiltered(this.$store) : 0).toLocaleString('en')
       }
     }
 })

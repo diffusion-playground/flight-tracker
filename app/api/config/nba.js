@@ -21,7 +21,8 @@ export default $store => ({
                 topicPath: '?rest/sports/nba/events//',
                 storeSetFnString: 'flights/setTopicsTree'
             },
-            sourceDataStoreFn: 'nba/set'
+            sourceDataStoreFn: 'nba/set',
+            dataUnitSize: 1050
         }
         
         console.log('NBA Config Initialized')
@@ -40,7 +41,7 @@ export default $store => ({
     },
 
     getSavingsPercentage($store) {
-        return $store.state.nba.savingsPercentage
+        return (100 - $store.state.nba.savingsPercentage).toFixed(0)
     },
 
     getSubscriptions() {
@@ -81,6 +82,22 @@ export default $store => ({
 
     getShowAll($store) {
         return $store.state.nba.showAll
+    },
+
+    getDataUnitSize() {
+        return this.pageAssets.dataUnitSize
+    },
+
+    getMessagesSentCount($store) {
+        return $store.state.nba.messagesSentCount
+    },
+
+    getMessagesReceivedCount($store) {
+        return $store.state.nba.messagesReceivedCount
+    },
+
+    getReceivedDataSize($store) {
+        return $store.state.nba.receivedDataSize
     }
 
 })

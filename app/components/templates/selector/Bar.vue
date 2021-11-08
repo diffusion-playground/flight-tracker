@@ -76,7 +76,7 @@ export default {
     }
 
     .selector-btn.active {
-        background-color:lightblue;
+        background-color:#edf6fb;
         color: #1C376C !important;
     }
 

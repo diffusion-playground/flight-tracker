@@ -21,7 +21,8 @@ export default $store => ({
                 topicPath: '?REST//',
                 storeSetFnString: 'flights/setTopicsTree'
             },
-            sourceDataStoreFn: 'flights/set'
+            sourceDataStoreFn: 'flights/set',
+            dataUnitSize: 35
         }
         console.log('Flights Tracker Config Initialized')
     },
@@ -83,5 +84,22 @@ export default $store => ({
 
     getShowAll($store) {
         return $store.state.flights.showAll
+    },
+
+    getDataUnitSize() {
+        return this.pageAssets.dataUnitSize
+    },
+
+    getMessagesSentCount($store) {
+        return $store.state.flights.messagesSentCount
+    },
+
+    getMessagesReceivedCount($store) {
+        return $store.state.flights.messagesReceivedCount || 0
+    },
+
+    getReceivedDataSize($store) {
+        return $store.state.flights.showAll?
+            $store.state.flights.receivedDataSizeAll : $store.state.flights.receivedDataSizeFiltered
     }
 })

@@ -10,7 +10,7 @@
         <p :style="{'text-align':'center', 'width':'75%'}">Click here to view your data organized with Diffusion Topic Tree.</p>
         <DButton :dhref="`#`" :dtext="`Show Topic Tree`" :dclass="`btn mr-2 btn-primary`" @dclick="onShowTopicsTree" v-if="diffusionConnected" />
 
-        <img class="diffusion-enabled" src="~/assets/images/diffusion-enabled.png" />
+        <img class="diffusion-enabled" src="~/assets/images/diffusion-enabled.gif" />
 
         <Modal v-show="showModal" @close-modal="showModal = false" :width="51" :height="700">
             <div class="topic-tree-intro">
@@ -101,6 +101,6 @@ export default ({
 
 .diffusion-enabled, .diffusion-disabled {
     max-width: 365px;
-    margin-top: 74px;
+    margin-top: 15px;
 }
 </style>
