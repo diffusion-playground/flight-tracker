@@ -21,8 +21,12 @@ export default ({
     },
     methods: {
         onTemplateChanged(oldConfig) {          
-          this.$diffusionService.setConfig(this.$store.state.app.config)
-          this.$diffusionService.switchSubscriptions(oldConfig, this.$store.state.app.config)
+            this.$diffusionService.setConfig(this.$store.state.app.config)
+            this.$diffusionService.switchSubscriptions(oldConfig, {
+                    configOb: this.$store.state.app.config,
+                    useLiveData: this.$store.state.app.useLiveData
+                }
+            )
         }
     }
 })

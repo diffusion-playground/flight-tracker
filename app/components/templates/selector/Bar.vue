@@ -29,7 +29,11 @@ export default {
     methods: {
         setTemplate(evt, template) {            
             this.toggleBtns(evt.currentTarget)
-            const previousConfig = this.$store.state.app.config
+            const previousConfig = {
+                configOb: this.$store.state.app.config,
+                useLiveData: this.$store.state.app.useLiveData
+            }
+            
             this.$store.commit('app/setTemplate', template)
             this.setAppConfig(template)
             this.$emit(`templatechanged`, previousConfig)

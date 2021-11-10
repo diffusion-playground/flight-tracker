@@ -41,7 +41,7 @@ export default $store => ({
     onConnectedToDiffusion() {
         console.log('connected to diffusion');
         
-        this.setTopicViews();
+        //this.setTopicViews();
         
         this.isConnected = true;
         
@@ -63,11 +63,18 @@ export default $store => ({
         let diffusionClient = this.diffusionClient
         
         // Unsubscribe previous
-        oldConfig.getSubscriptions().map(subscription => diffusionClient.unsubscribe(subscription.topicPath));
+        oldConfig.configOb.getSubscriptions().map(subscription => diffusionClient.unsubscribe(
+            oldConfig.useLiveData ? subscription.liveTopicPath : subscription.topicPath
+            )
+        );
         
         // Subscribe new        
-        newConfig.getSubscriptions().map( 
-            subscription => diffusionClient.subscribe({topicPath: subscription.topicPath})
+        newConfig.configOb.getSubscriptions().map( 
+            subscription => diffusionClient.subscribe(
+                {
+                    topicPath: newConfig.useLiveData ? subscription.liveTopicPath : subscription.topicPath
+                }
+            )
         )
     },
 

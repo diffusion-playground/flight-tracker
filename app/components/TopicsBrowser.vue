@@ -26,11 +26,12 @@ export default {
     methods: {
         async show() {
             
-            const results = await this.$diffusionService.fetchTreeTopics(this.$store.state.app.config.getTreeTopicPath())
+            const results = await this.$diffusionService.fetchTreeTopics(this.$store.state.app.config.getTreeTopicPath(this.$store))
             console.log(results)
-            this.topicsTree = new FlightTrackerTree('#topicsTree')
-                        .setSubscribeCallback(data => this.onSubscribe(data))
-                        .showTreeFromData(results)                
+            
+            this.topicsTree = new FlightTrackerTree('#topicsTree')                        
+                                .setSubscribeCallback(data => this.onSubscribe(data))
+                                .showTreeFromData(results)                                        
             this.treeLoaded = true
             
         },

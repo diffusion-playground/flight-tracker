@@ -5,8 +5,8 @@
         <div>
             <div class="data-list">
                 <div>Messages {{sentReceivedText}}: {{getMessagesCount}}</div>
-                <div>Last message size: {{lastMessageSize}} kb</div>
-                <div>Total data {{sentReceivedText}}: {{value}} kb</div>
+                <div>Last message size: {{lastMessageSize}} KB</div>
+                <div>Total data {{sentReceivedText}}: {{value}} bytes</div>
                 <div v-if="elClass === 'incoming-green'">Data Savings: {{dataSavingsPercentage}}%</div>
             </div>
         </div>

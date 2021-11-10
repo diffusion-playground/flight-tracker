@@ -1,11 +1,11 @@
 <template>    
-    <div v-if="event.competitions && event.competitions.length > 0">
+    <div v-if="event.competitions && event.competitions.length > 0" class="event-container">
         <a class="nba-event" href="#" @click="onEventClick">        
             <TemplatesNbaListTeam :competitor="event.competitions[0].competitors[1]" />             
             <TemplatesNbaListTeam :competitor="event.competitions[0].competitors[0]" :isAt="true" />
             <TemplatesNbaEventShortDetail :eventType="event.status.type" />
         </a>
-        <TemplatesNbaEventExtendedInfo :event="event" />
+        <TemplatesNbaEventExtendedInfo :event="event" v-if="showExtendedInfo" />
     </div>
 </template>
 <script>
@@ -13,7 +13,7 @@ export default ({
     props: ['event'],
     data() {
         return {
-            showExtendedInfo: false,
+            showExtendedInfo: true,
             extendedGames: []
         }
     },
@@ -32,6 +32,9 @@ export default ({
 })
 </script>
 <style scoped>
+.event-container {
+    width: 100%;
+}
 .nba-event {
     display: flex;
     justify-content: flex-start;

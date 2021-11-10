@@ -13,12 +13,14 @@ export default $store => ({
             },
             subscriptions: [
                 {
-                    topicPath: '?REST/opensky-network.org/airlines//',
+                    topicPath: '?RESTPUBLISHED/opensky-network.org/airlines//',
+                    liveTopicPath: '?REST/opensky-network.org/airlines//',
                     storeSetFnString: 'flights/setFlight'
                 }
             ],
             topicsTree: {
-                topicPath: '?REST//',
+                topicPath: '?RESTPUBLISHED//',
+                liveTopicPath: '?REST//',
                 storeSetFnString: 'flights/setTopicsTree'
             },
             sourceDataStoreFn: 'flights/set',
@@ -54,8 +56,8 @@ export default $store => ({
         return this.pageAssets.subscriptions
     },
 
-    getTreeTopicPath() {
-        return this.pageAssets.topicsTree.topicPath
+    getTreeTopicPath($store) {
+        return $store.state.app.useLiveData ? this.pageAssets.topicsTree.liveTopicPath : this.pageAssets.topicsTree.topicPath
     },
 
     getRawData($store) {
@@ -95,11 +97,15 @@ export default $store => ({
     },
 
     getMessagesReceivedCount($store) {
-        return $store.state.flights.messagesReceivedCount || 0
+        return Math.round(0.66 * $store.state.flights.messagesReceivedCount)
     },
 
     getReceivedDataSize($store) {
         return $store.state.flights.showAll?
             $store.state.flights.receivedDataSizeAll : $store.state.flights.receivedDataSizeFiltered
+    },
+
+    resetTemplateData($store) {
+        $store.commit('flights/clearFlights', [])
     }
 })

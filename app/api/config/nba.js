@@ -13,16 +13,18 @@ export default $store => ({
             },
             subscriptions: [
                 {
-                    topicPath: '?ESPN/nba-scoreboard/events/.*',
+                    topicPath: '?ESPNPUBLISHED/nba-scoreboard/events/.*',
+                    liveTopicPath: '?ESPN/nba-scoreboard/events/.*',
                     storeSetFnString: 'nba/setEvent'
                 }
             ],
             topicsTree: {
-                topicPath: '?rest/sports/nba/events//',
+                topicPath: '?restpublished/sports/nba/events//',
+                liveTopicPath: '?rest/sports/nba/events//',
                 storeSetFnString: 'flights/setTopicsTree'
             },
             sourceDataStoreFn: 'nba/set',
-            dataUnitSize: 1050
+            dataUnitSize: 105
         }
         
         console.log('NBA Config Initialized')
@@ -52,8 +54,8 @@ export default $store => ({
         return this.pageAssets.subscriptions.map(subscription => subscription.storeSetFnString)
     },
 
-    getTreeTopicPath() {
-        return this.pageAssets.topicsTree.topicPath
+    getTreeTopicPath($store) {
+        return $store.state.app.useLiveData ? this.pageAssets.topicsTree.liveTopicPath : this.pageAssets.topicsTree.topicPath
     },
     
     getRawData($store) {        
@@ -93,11 +95,15 @@ export default $store => ({
     },
 
     getMessagesReceivedCount($store) {
-        return $store.state.nba.messagesReceivedCount
+        return Math.round(0.66 * $store.state.nba.messagesReceivedCount)
     },
 
     getReceivedDataSize($store) {
         return $store.state.nba.receivedDataSize
+    },
+
+    resetTemplateData($store) {
+        $store.commit('nba/clearEvents', [])
     }
 
 })

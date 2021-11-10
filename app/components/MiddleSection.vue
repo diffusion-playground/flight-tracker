@@ -100,7 +100,7 @@ export default ({
 }
 
 .diffusion-enabled, .diffusion-disabled {
-    max-width: 365px;
+    width: 100%;
     margin-top: 15px;
 }
 </style>

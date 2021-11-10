@@ -1,6 +1,7 @@
 export const state = () => ({
     config: null,
-    template: 'TemplatesNbaEvents'
+    template: 'TemplatesNbaEvents',
+    useLiveData: false
 })
 
 export const mutations = {
@@ -9,5 +10,8 @@ export const mutations = {
     },
     setTemplate(state, template) {
         state.template = template
+    },
+    setLiveData(state, value) {
+        state.useLiveData = value
     }
 }

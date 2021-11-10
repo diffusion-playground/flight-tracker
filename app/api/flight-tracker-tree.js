@@ -26,6 +26,8 @@ export default class FlightTrackerTree {
     }
 
     showTreeFromData = results => {        
+        this.topicsRootEl.innerHTML = 'Fetching Topics tree...';
+
         this.processNodes(results.map(dryResult => ({
                     path: dryResult.path(),
                     pathItems: dryResult.path().split('/'),
@@ -33,9 +35,8 @@ export default class FlightTrackerTree {
                 })
             )
         )
-        
-        //Show the tree
         this.topicsRootEl.innerHTML = '';
+        //Show the tree        
         this.topicsRootEl.appendChild(this.treeFragment);
 
         this.isGenerated = true
@@ -43,8 +44,6 @@ export default class FlightTrackerTree {
         this.addTreeListeners();
         
         this.collapseInitial()
-
-//        this.selectPath('/REST/sports/nba/events')
 
         return this
     }

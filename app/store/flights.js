@@ -15,8 +15,7 @@ export const state = () => ({
   })
   
   export const mutations = {
-    setFlight (state, remoteFlight) {
-      state.messagesSentCount++      
+    setFlight (state, remoteFlight) {      
       state.lastMessage = remoteFlight
       const flightIdx = state.subscribedFlights.findIndex(flight => flight[0] === remoteFlight[0])
       if (flightIdx !== -1) {
@@ -26,6 +25,7 @@ export const state = () => ({
       }      
     },
     set (state, flights) {
+      state.messagesSentCount++ 
       state.flightStates = flights
       state.messagesReceivedCount += 1
       state.incomingDataSourceData += JSON.stringify(state.flightStates).length      
@@ -39,5 +39,9 @@ export const state = () => ({
     },
     setTopicsTree(state, topicsTree) {
       state.topicsTree = topicsTree
+    },
+    clearFlights(state, flights) {
+      state.subscribedFlights = []
+      state.flightStates = []
     }
   }

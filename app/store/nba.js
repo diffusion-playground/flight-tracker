@@ -40,6 +40,10 @@ export const mutations = {
       state.incomingDiffusionDataAll = ((state.savingsPercentage) * state.incomingDataSourceData) / 100
       state.incomingDiffusionDataFiltered = ((state.savingsPercentage) * state.incomingDataSourceData) / 100
     },
+    clearEvents(state, events = []) {
+      state.events = []
+      state.eventStates = []
+    }
 }
 
 export const actions = {

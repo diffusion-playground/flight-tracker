@@ -24,7 +24,7 @@ export default ({
 }
 .extended-score {
     margin: 15px;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
 }
 </style>
