@@ -5,7 +5,7 @@
 </template>
 <script>
 export default ({
-    props: ['competition']
+    props: ['competition'],    
 })
 </script>
 <style scoped>

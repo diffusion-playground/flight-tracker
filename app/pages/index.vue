@@ -59,8 +59,8 @@ export default {
     /** Connect to DIFFUSION */    
     this.$diffusionService.connect(
         'integra.us.diffusion.cloud',
-        'admin',
-        'admin1234',
+        'playground',
+        'g733Olufsen!',
         this.$store.state.topics.rootTopic,
         /* on message from Diffusion */
         null,

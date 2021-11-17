@@ -5,17 +5,58 @@
         </div>
         <div class="odds-column">
             <div class="odds-regular">SPREAD</div>
-            <div class="odds-bold">{{competition.odds[0].details}}</div>
+            <div class="odds-bold" ref="spread">{{displaySpread}}</div>
         </div>
         <div class="odds-column">
             <div class="odds-regular">OVER/UNDER</div>
-            <div class="odds-bold">{{competition.odds[0].overUnder}}</div>
+            <div class="odds-bold" ref="overUnder">{{displayOverUnder}}</div>
         </div>
     </div>
 </template>
 <script>
 export default ({
-    props: ['competition']
+    props: ['competition'],
+    data() {
+        return {
+            spread: '',
+            overUnder: ''
+        }
+    },
+    computed: {
+        displaySpread() {            
+            if (this.competition.odds) {                                
+                if (this.spread != this.competition.odds[0].details) {
+                    this.highlight(this.$refs.spread)
+                }
+                this.spread = this.competition.odds[0].details
+                return this.spread
+            }
+            return ''
+        },
+        displayOverUnder() {
+            if (this.competition.odds) {                                
+                if (this.overUnder != this.competition.odds[0].overUnder) {
+                    this.highlight(this.$refs.overUnder)
+                }
+                this.overUnder = this.competition.odds[0].overUnder
+                return this.overUnder
+            }
+            return ''
+        }
+    },
+    methods: {
+        highlight(el) { 
+            if (el) {
+                el.classList.add('highlighted')
+                setTimeout(this.unHighlight, 2000)
+                console.log('Highlighted: ', el);
+            }
+        },
+        unHighlight() {
+            this.$refs.spread.classList.remove('highlighted')
+            this.$refs.overUnder.classList.remove('highlighted')            
+        }
+    }
 })
 </script>
 <style scoped>
@@ -44,5 +85,9 @@ export default ({
     color: #1C376C;
     font-size: 1.5rem;
     font-weight: 700;
+}
+
+.odds-bold.highlighted {
+    background-color: lightgreen;
 }
 </style>

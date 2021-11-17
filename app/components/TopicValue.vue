@@ -33,5 +33,6 @@ export default ({
 <style scoped>
     .vjs-tree {
         height: 320px;
+        font-family: 'Courier New', Courier, monospace;
     }
 </style>

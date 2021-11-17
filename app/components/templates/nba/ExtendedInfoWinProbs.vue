@@ -4,9 +4,9 @@
         <div class="probabilities">
             <img class="nba-logo" :src="competition.competitors[1].team.logo" />
             <div class="win-percentages">
-                <div>Away Wins: <span class="win-percentage">{{awayWinPercentage}}%</span></div>
+                <div><span class="win-percentage" ref="awayPercentage">{{awayWinPercentage}}%</span></div>
                 <div :style="{'margin':'0 5px'}">|</div>
-                <div>Home Wins: <span class="win-percentage">{{homeWinPercentage}}%</span></div>
+                <div><span class="win-percentage" ref="homePercentage">{{homeWinPercentage}}%</span></div>
             </div>
             <img class="nba-logo" :src="competition.competitors[0].team.logo" />
         </div>
@@ -15,21 +15,40 @@
 <script>
 export default ({
     props: ['competition'],
+    data() {
+        return {
+            hPercentage: 0,
+            aPercentage: 0
+        }
+    },
     methods: {
         getPercentage(value) {
             return (value * 100)
+        },
+        highlight(el) {            
+            el.classList.add('highlighted')
+            setTimeout(this.unHighlight, 2000)
+            console.log('Highlighted: ', el);
+        },
+        unHighlight() {
+            this.$refs.awayPercentage.classList.remove('highlighted')
+            this.$refs.homePercentage.classList.remove('highlighted')            
         }
     },
     computed: {
         awayWinPercentage() {
             try {
-                return this.getPercentage(parseFloat(this.competition.situation.lastPlay.probability.awayWinPercentage)).toFixed(2)            
+                this.$refs.awayPercentage ? this.highlight(this.$refs.awayPercentage):null
+                this.aPercentage = this.getPercentage(parseFloat(this.competition.situation.lastPlay.probability.awayWinPercentage)).toFixed(2)            
+                return this.aPercentage
             } catch (e) {
+                console.log(e)
                 return 0.00
             }
         },
         homeWinPercentage() {
             try {
+                this.$refs.homePercentage ? this.highlight(this.$refs.homePercentage) : null
                 return this.getPercentage(parseFloat(this.competition.situation.lastPlay.probability.homeWinPercentage)).toFixed(2)            
             } catch (e) {
                 return 0.00
@@ -71,5 +90,9 @@ export default ({
 
 .win-percentage {
     font-weight: bold;
+}
+
+.win-percentage.highlighted {
+    background-color: lightgreen;
 }
 </style>
