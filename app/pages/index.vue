@@ -56,11 +56,13 @@ export default {
     this.$diffusionService.setStore(this.$store)
     this.$diffusionService.setConfig(this.$store.state.app.config)
 
+    console.log('CONFIG:', this.$config)
+
     /** Connect to DIFFUSION */    
     this.$diffusionService.connect(
-        'integra.us.diffusion.cloud',
-        'playground',
-        'g733Olufsen!',
+        this.$config.diffusionServer,
+        this.$config.diffusionUser,
+        this.$config.diffusionPassword,
         this.$store.state.topics.rootTopic,
         /* on message from Diffusion */
         null,

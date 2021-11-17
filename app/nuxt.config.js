@@ -73,4 +73,9 @@ export default {
   build: {
     transpile: ['vue-tooltip']
   },  
+  publicRuntimeConfig: {
+    diffusionServer: 'integra.us.diffusion.cloud',    
+    diffusionUser: 'playground',
+    diffusionPassword: 'g733Olufsen!',
+  }
 }
