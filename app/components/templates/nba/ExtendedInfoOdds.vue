@@ -49,7 +49,6 @@ export default ({
             if (el) {
                 el.classList.add('highlighted')
                 setTimeout(this.unHighlight, 2000)
-                console.log('Highlighted: ', el);
             }
         },
         unHighlight() {

@@ -24,6 +24,10 @@ html {
     justify-content: flex-start;
 }
 
+.justify-between {
+    justify-content: space-between !important;
+}
+
 .main-col {
     width: 455px;
     border: 1px solid lightgray;
@@ -160,7 +164,7 @@ html {
 
 .flight-poller textarea {
     width: 430px;
-    height: 1460px;
+    height: 630px;
     border: 0px;
     font-size: 10px;
     line-height: 20px;
@@ -489,4 +493,28 @@ a:hover {
 
 .nba-events {
     list-style: none;
+}
+
+.avatar__clean {
+    /* Rounded border */
+    border-radius: 50%;    
+    border: 1px solid gray;
+}
+
+.avatar48 {
+    /* Rounded border */
+    border-radius: 50%;
+    height: 48px;
+    width: 60px;
+    border: 1px solid gray;
+    padding: 5px;
+}
+
+.avatar__image {
+    /* Rounded border */
+    border-radius: 50%;
+
+    /* Take full size */
+    height: 100%;
+    width: 100%;
 }

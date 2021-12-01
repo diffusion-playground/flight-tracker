@@ -1,7 +1,7 @@
 <template>
-    <div class="main-col middle no-border" style="width: 20%">
+    <div class="main-col middle no-border">
         <SectionHeader title="Enrich" subTitle="">
-            <p>Breakdown your data and make it easy to navigate through.</p>
+            <!-- <p>Breakdown your data and make it easy to navigate through.</p> -->
         </SectionHeader>
             
         <!--<CloudOnPremiseToggle />-->
@@ -27,6 +27,9 @@
             </div>            
             <TopicsBrowser ref="topicsBrowser" />
         </Modal>
+
+        <div id="templateMoreData" class="templateMoreData"></div>
+
     </div>
 </template>
 <script>
@@ -54,6 +57,9 @@ export default ({
 })
 </script>
 <style>
+.middle {
+    width: 90% !important;
+}
 .topic-tree-intro {
     display: flex;
     justify-content: center;
@@ -100,7 +106,11 @@ export default ({
 }
 
 .diffusion-enabled, .diffusion-disabled {
-    width: 100%;
-    margin-top: 15px;
+    width: 50%;
+    margin-top: 20px;
+}
+
+.templateMoreData {
+    width: 90%;
 }
 </style>

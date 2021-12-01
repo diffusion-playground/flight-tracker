@@ -1,6 +1,6 @@
 <template>    
     <div v-if="event.competitions && event.competitions.length > 0" class="event-container">
-        <a class="nba-event" href="#" @click="onEventClick">        
+        <a class="nba-event" href="#" @click="onEventClick" :data-id="event.competitions[0].id">        
             <TemplatesNbaListTeam :competitor="event.competitions[0].competitors[1]" />             
             <TemplatesNbaListTeam :competitor="event.competitions[0].competitors[0]" :isAt="true" />
             <TemplatesNbaEventShortDetail :eventType="event.status.type" />
@@ -13,17 +13,21 @@ export default ({
     props: ['event'],
     data() {
         return {
-            showExtendedInfo: true,
+            showExtendedInfo: false,
             extendedGames: []
         }
     },
     methods: {
         onEventClick(evt) {
             evt.stopPropagation();
-            evt.preventDefault();
-            this.showExtendedInfo = this.showExtendedInfo? false:true
+            evt.preventDefault();            
+            this.toggleExtendedInfo(evt)
             /* The following is needed so it gives the extended info time to render*/
             setTimeout(() => { this.updateSavingsPercentage() }, 500)
+            this.$emit('event-clicked', evt)
+        },
+        toggleExtendedInfo() {            
+            this.showExtendedInfo = !this.showExtendedInfo
         },
         updateSavingsPercentage() {            
             this.$store.commit('nba/setShowAll', document.querySelectorAll('.extended-info').length > 0 ? false : true)

@@ -5,11 +5,12 @@
             &nbsp;<h1>Playground</h1>        
         </div>        
 
+        <p>A sample web application to <b>consume</b>, <b>enrich</b> and <b>deliver</b> real-time events using Diffusion </p>
+
         <TemplatesSelectorBar v-on:templatechanged="onTemplateChanged" />   
 
         <h3 class="app-title">{{appTitle}}</h3>
-
-        <p>A sample web application to <b>consume</b>, <b>enrich</b> and <b>deliver</b> real-time events using Diffusion </p>
+        
     </div>
 </template>
 <script>

@@ -11,12 +11,13 @@
 
 <script>
 export default {
-    props: ['width', 'height'],
+    props: ['width', 'height', 'minWidth'],
     data() {
         return {
             style: {
                 'width': this.width +'%',
-                'height': this.height + 'px'
+                'height': this.height + 'px',
+                'min-width': (this.minWidth || 300) + 'px'
             }
         }
     }
@@ -42,7 +43,7 @@ export default {
   background-color: white;
   height: 560px;
   width: 500px;
-  margin-top: 1rem;
+  margin: auto;
   padding: 10px 0;
   border-radius: 10px;
   border: 1px solid lightgray;

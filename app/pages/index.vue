@@ -3,7 +3,7 @@
     <div class="d-centered-flex">
       <Header />
     </div>    
-    <div class="d-centered-flex">
+    <div class="d-centered-flex justify-between">
       <!-- CONSUME -->
       <LeftSection /> 
       <!-- ENRICH -->     

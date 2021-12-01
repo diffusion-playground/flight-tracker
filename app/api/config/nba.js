@@ -51,7 +51,7 @@ export default $store => ({
     },
 
     getMessageCommitStorages() {
-        return this.pageAssets.subscriptions.map(subscription => subscription.storeSetFnString)
+        return [...this.pageAssets.subscriptions.map(subscription => subscription.storeSetFnString), 'nba/setLastPlay']
     },
 
     getTreeTopicPath($store) {

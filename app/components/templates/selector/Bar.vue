@@ -33,7 +33,7 @@ export default {
                 configOb: this.$store.state.app.config,
                 useLiveData: this.$store.state.app.useLiveData
             }
-            
+            document.getElementById('templateMoreData').innerHTML = ''
             this.$store.commit('app/setTemplate', template)
             this.setAppConfig(template)
             this.$emit(`templatechanged`, previousConfig)

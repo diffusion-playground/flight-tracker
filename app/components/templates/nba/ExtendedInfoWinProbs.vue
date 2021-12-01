@@ -27,8 +27,7 @@ export default ({
         },
         highlight(el) {            
             el.classList.add('highlighted')
-            setTimeout(this.unHighlight, 2000)
-            console.log('Highlighted: ', el);
+            setTimeout(this.unHighlight, 2000)            
         },
         unHighlight() {
             this.$refs.awayPercentage.classList.remove('highlighted')

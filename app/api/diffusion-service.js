@@ -94,11 +94,9 @@ export default $store => ({
         console.log('OnDiffusioMessage: ', topic, message, this.config.getMessageCommitStorages())
         this.config.getMessageCommitStorages().map(storageFn => {
             if (typeof storageFn === 'object' ) {
-                console.log('Storing object: ', storageFn)
                 this.store.commit(storageFn.storeSetFnString, message)
                 return
             }
-            console.log('Storing string: ', storageFn)
             this.store.commit(storageFn, message)
         })
     },
