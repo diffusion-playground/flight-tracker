@@ -2,13 +2,13 @@
     <div class="bar">
         <p class="bar-title">Select the data type you want to use:</p>
         <div class="navbar">                
-            <a class="flex-col selector-btn active" ref="firstActiveBtn" href="#" @click="setTemplate($event, 'TemplatesNbaEvents')">
+            <a class="flex-row selector-btn active" ref="firstActiveBtn" href="#" @click="setTemplate($event, 'TemplatesNbaEvents')">
                 <div class="big-sports"></div>
                 <div>NBA Scoreboard</div>
             </a>
-            <a class="flex-col selector-btn" href="#" @click="setTemplate($event, 'TemplatesFlightsTracker')">
+            <a class="flex-row selector-btn" href="#" @click="setTemplate($event, 'TemplatesFlightsTracker')">
                 <div>
-                    <svg width="35" height="38" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M21 16V14L13 9V3.5C13 2.67 12.33 2 11.5 2C10.67 2 10 2.67 10 3.5V9L2 14V16L10 13.5V19L8 20.5V22L11.5 21L15 22V20.5L13 19V13.5L21 16Z" fill="#203C71"/>
                     </svg>
                 </div>
@@ -71,7 +71,7 @@ export default {
 
     .selector-btn, .selector-btn.active {
         margin: 10px;
-        padding: 25px;
+        padding: 5px 25px;
         border: 1px solid lightgrey;
         border-radius: 9px;
         color: grey !important;
@@ -93,8 +93,9 @@ export default {
         background-image: url('~assets/images/sports-icon.png');
         background-repeat: no-repeat;
         background-position:center;
-        width: 35px;
-        height: 38px;    
+        background-size: cover;
+        width: 24px;
+        height: 24px;    
         margin: 2px;
     }
 </style>

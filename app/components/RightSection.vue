@@ -1,8 +1,8 @@
 <template>
     <div class="col main-col right">
         <SectionHeader title="Deliver" subTitle="">
-          <!--<p>Millions of client applications can subscribe in realtime to any event message using our Adapters and SDK.</p>
-          <p>Diffusion automatic topic tree, makes fine-grained subscription very simple</p>-->
+          <p>Millions of client applications can subscribe in realtime to any event message using our Adapters and SDK.</p>
+          <p>Diffusion automatic topic tree, makes fine-grained subscription very simple</p>
         </SectionHeader>
         <div class="d-start-flex deliver-flow">
           <div class="left-column consume-title">
@@ -20,7 +20,7 @@
         
         <div :class="templateHolderClass">
           <TemplatesNbaEvents v-if="currentComponent === 'TemplatesNbaEvents'" />
-          <TemplatesFlightsTracker v-if="currentComponent === 'TemplatesFlightsTracker'" />
+          <TemplatesFlightsRightColumn v-if="currentComponent === 'TemplatesFlightsTracker'" />
         </div>
         
       </div>
@@ -68,6 +68,7 @@ export default ({
 <style scoped>
 .holder-show, .holder-hide {
   display: flex;
+  width: 100%;
 }
 
 .holder-hide {

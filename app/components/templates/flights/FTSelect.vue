@@ -1,6 +1,6 @@
 <template>
     <span>
-        <select @change="onSelectionChange($event)" autocomplete="off">
+        <select @change="onSelectionChange($event)" autocomplete="off" :name="name">
             <option v-for="option in options" :key="option.value" :value="option.value">
                 {{ option.text }}
             </option>

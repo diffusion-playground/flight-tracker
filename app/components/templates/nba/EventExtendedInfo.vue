@@ -1,5 +1,5 @@
 <template>
-    <span>
+    <span class="extended-info-holder" :data-id="event.id">
         <div class="extended-info">
             <TemplatesNbaExtendedInfoHeader :competition="event.competitions[0]" :competitors="event.competitions[0].competitors" />        
         </div>

@@ -1,17 +1,11 @@
 <template>
-    <div class="flight-map">
-        <TemplatesFlightsFTSelect
-            :options="options"
-            :selected="selected"
-            :name="thisSelect"
-            v-on:valuechanged="onSelectChanged"
-        ></TemplatesFlightsFTSelect>
+    <div class="flight-map" id="flightTracker">        
         <div class="map-wrap">        
             <client-only>
                 <l-map 
                     :zoom="7" 
                     :minZoom="7"
-                    :center="[33.70,-117.50]" 
+                    :center="[33.70,-100.50]" 
                     :maxBounds="[[31, -122],[35, -115]]"
                     v-on:zoomed="getMapBounds(this)"
                     :options="{preferCanvas: true}"
@@ -56,14 +50,24 @@
 </template>
 <script>               
     export default {
-        props: ['options', 'selected', 'filterFn'],
+        props: ['airlinesFilter', 'speedFilter', 'altitudeFilter'],
         computed: {
-            flights() {
+            flights() {                                
                 const computed = (
-                                    this.selectedFilter !== '--ALL--' ?
-                                    this.$store.state.flights.subscribedFlights.filter(flight => this.filterFn(flight, this.selectedFilter))
-                                    : this.$store.state.flights.subscribedFlights.filter(flight => this.filterAllFn(flight))
-                                ).slice(0,100)
+                                // At last filter By Speed 
+                                this.getFilteredFlights(                                    
+                                    // Then filter by Altitude
+                                    this.getFilteredFlights(
+                                        // Airlines filtered first
+                                        this.getFilteredFlights(
+                                            this.$store.state.flights.subscribedFlights, 
+                                            this.airlinesFilter, this.filterAirlines // Airlines filter & function
+                                        ),
+                                        this.altitudeFilter, this.filterAltitude // Altitude filter & function
+                                    ),
+                                    this.speedFilter, this.filterSpeed // Speed filter & function
+                                )
+                                ).slice(0,100)     
                 return computed
             }
         },
@@ -73,20 +77,56 @@
                 url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
                 attribution:
                     '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-                iconSize: 16,
-                selectedFilter: '--ALL--',
+                iconSize: 16,                
                 thisSelect: 'thisSelect'
             };
         },
-        methods: {
-            onSelectChanged(selected) {
-                console.log('Selected: ', selected)
-                this.selectedFilter = selected                
-                if (selected === '--ALL--') {
-                    this.$store.commit('flights/setShowAll', true);
-                } else {
-                    this.$store.commit('flights/setShowAll', false);
+        methods: {            
+            getFilteredFlights(data, filter, filterFn) {                
+                return filter !== '--ALL--' ?
+                        data.filter(flight => filterFn(flight, filter))
+                        : data.filter(flight => this.filterAllFn(flight))
+            },
+            /** Filter Airlines */
+            filterAirlines(flight, selectedFilter) {                     
+            return flight[1] && flight[1].substr(0,selectedFilter.length) === selectedFilter && this.latLongIsValid(flight)
+            },
+
+            /** Filter by Altitude */
+            filterAltitude(flight, selectedFilter) {          
+            if (selectedFilter == 1) {                        
+                return flight[7] < 5000  && this.latLongIsValid(flight);
+            }
+
+            if (selectedFilter == 2 ) {            
+                return flight[7] >= 5000 && flight[7] < 10000 && this.latLongIsValid(flight);
+            }          
+            return flight[7] >= 10000 && this.latLongIsValid(flight);          
+            },
+
+            /** Filter by Speed */
+            filterSpeed(flight, selectedFilter) {                       
+                if (typeof flight[0] !== 'string') {
+                    console.log('This is not a flight');
+                    return // This is not a flight
                 }
+                /* Converting from m/s to mph */
+                const mph = flight[9]? parseFloat(flight[9]) * 2.236936 : 0
+
+                if (selectedFilter == 1) {
+                return mph < 200 && this.latLongIsValid(flight);
+                }
+
+                if (selectedFilter == 2 ) {            
+                return mph >= 200 && mph < 500 && this.latLongIsValid(flight);
+                }
+
+                return mph >= 500 && this.latLongIsValid(flight);          
+            },
+
+            latLongIsValid(flight) {
+            const isValid = flight[6] !== null && flight[5] !== null          
+            return isValid
             },
             getRotation(trueTrack) {
                 return `rotate(${trueTrack})`

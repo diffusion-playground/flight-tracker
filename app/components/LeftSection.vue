@@ -1,8 +1,8 @@
 <template>
     <div class="col main-col">
         <SectionHeader title="Consume"  subTitle="">
-          <!--<p>Easily publish realtime events from any <a href='#' v-tooltip.bottom-center="`${toolTip}`">Source</a> using our Adapters and SDK.</p>
-          <p>Hook any data feed into Diffusion and monitor its health in realtime.</p>-->
+          <p>Easily publish realtime events from any <a href='#' v-tooltip.bottom-center="`${toolTip}`">Source</a> using our Adapters and SDK.</p>
+          <p>Hook any data feed into Diffusion and monitor its health in realtime.</p>
         </SectionHeader>
         <div class="d-end-flex consume-flow" :style="{'margin-top':'10px'}">
           <div class="left-column consume-title">
@@ -10,7 +10,7 @@
             <p class="flow-title">{{title}}</p>
             <p class="flow-subtitle">JSON Stream</p>
           </div>
-          <div class="right-column">
+          <div class="right-column flow">
             <img src="~/assets/images/consume-flow.svg"/>
           </div>
         </div>
@@ -37,3 +37,8 @@ export default ({
     }
 })
 </script>
+<style>
+.right-column.flow {
+  margin-top: 70px !important;
+}
+</style>

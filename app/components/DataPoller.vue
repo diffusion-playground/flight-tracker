@@ -19,7 +19,7 @@ export default ({
     },
     computed: {
         polledData() {
-            console.log('APP:', this.$store.state.app.config)
+            //console.log('APP:', this.$store.state.app.config)
             return this.$store.state.app.config ? JSON.stringify(this.$store.state.app.config.getRawData(this.$store)) : ''
         }
     },

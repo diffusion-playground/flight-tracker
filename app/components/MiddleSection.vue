@@ -1,7 +1,7 @@
 <template>
     <div class="main-col middle no-border">
         <SectionHeader title="Enrich" subTitle="">
-            <!-- <p>Breakdown your data and make it easy to navigate through.</p> -->
+            <p>Breakdown your data and make it easy to navigate through.</p>
         </SectionHeader>
             
         <!--<CloudOnPremiseToggle />-->

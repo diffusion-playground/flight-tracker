@@ -2,8 +2,8 @@
     <div class="match-list">
         <h3>Select a match</h3>        
         <div class="nba-events">
-            <div v-for="event in events" :key="event.id">
-                <TemplatesNbaEvent :event="event" @event-clicked="onEventClicked" />
+            <div v-for="(event, index) in events" :key="event.id">
+                <TemplatesNbaEvent ref="eventItem" :event="event" :index="index" @event-clicked="onEventClicked" />
             </div>
         </div>
         <TemplatesNbaSportsbookModal ref="sportsBook" :competitionId="modalCompetitionId" @event-showespnmodal="toggleESPNModal"/>
@@ -14,7 +14,8 @@
 export default ({    
     data() {
         return {
-            modalCompetitionId: null
+            modalCompetitionId: null,
+            initialized: false
         }
     },
     computed: {
@@ -24,9 +25,12 @@ export default ({
     },
     methods: {
         onEventClicked(evt) {
-            this.modalCompetitionId = evt.currentTarget.dataset.id
-            /*this.$refs.sportsBook.toggle(evt.currentTarget)            */
+            this.modalCompetitionId = evt.currentTarget.dataset.id            
+            this.toggleEvent(evt.currentTarget)
             this.$store.commit('nba/setCompetitionId', evt.currentTarget.dataset.id)
+        },
+        toggleEvent(event) {            
+            this.$refs.eventItem.map(eventItem => eventItem.toggleEvent(event.dataset.id))
         },
         toggleESPNModal() {
             this.$refs.espnModal.toggle()

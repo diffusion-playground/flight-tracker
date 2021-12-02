@@ -9,7 +9,6 @@ html {
 
 .d-centered-flex, .d-end-flex, .d-start-flex {
     display: flex;    
-    padding: 0.5rem;
     justify-content: center;
 }
 
@@ -173,7 +172,7 @@ html {
     background-color: transparent;
 }
 
-.flight-map select {
+.flight-map select, .flight-selects select {
     /* White */
     background: #FFFFFF;
     /* Mid grey */
@@ -186,13 +185,13 @@ html {
     width: 100%;
 }
 .flight-map .map-wrap {
-    width: 420px;
-    height: 302px;
+    width: 810px;
+    height: 502px;
 }
 
 .flight-map .table-wrap {
-    width: 420px;
-    height: 150px;
+    width: 810px;
+    height: 220px;
     overflow: scroll;
 }
 
@@ -255,7 +254,7 @@ html {
 }
 
 .deliver-flow .left-column.consume-title {
-    margin-top: 20px;
+    margin-top: 80px;
     margin-right: 25px;
 }
 
@@ -517,4 +516,8 @@ a:hover {
     /* Take full size */
     height: 100%;
     width: 100%;
+}
+
+.hidden {
+    display: none;
 }
