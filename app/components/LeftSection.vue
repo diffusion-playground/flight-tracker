@@ -1,7 +1,7 @@
 <template>
     <div class="col main-col">
         <SectionHeader title="Consume"  subTitle="">
-          <p>Easily publish realtime events from any <a href='#' v-tooltip.bottom-center="`${toolTip}`">Source</a> using our Adapters and SDK.</p>
+          <p>Easily publish realtime events from any Source using our Adapters and SDK.</p>
           <p>Hook any data feed into Diffusion and monitor its health in realtime.</p>
         </SectionHeader>
         <div class="d-end-flex consume-flow" :style="{'margin-top':'10px'}">

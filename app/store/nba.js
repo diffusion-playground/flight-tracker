@@ -36,7 +36,7 @@ export const mutations = {
     },
 
     setLastPlay(state, event) {
-      if (event.competitions[0].situation) {
+      if (event.competitions && event.competitions[0].situation) {
         const competition = event.competitions[0]
         const competitors = event.competitions[0].competitors
         const lastPlay = competition.situation.lastPlay
@@ -85,8 +85,7 @@ export const mutations = {
 }
 
 export const actions = {
-  getTopicValue({state}, eventId) {     
-    console.log(state.events);
+  getTopicValue({state}, eventId) {         
     return state.events ? state.events.find(event => event.id == eventId) : {}
   },
   getTreeTopicValue({state}) {

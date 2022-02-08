@@ -1,5 +1,5 @@
 <template>
-    <div class="col main-col right">
+    <div class="col main-col">
         <SectionHeader title="Deliver" subTitle="">
           <p>Millions of client applications can subscribe in realtime to any event message using our Adapters and SDK.</p>
           <p>Diffusion automatic topic tree, makes fine-grained subscription very simple</p>
@@ -21,6 +21,7 @@
         <div :class="templateHolderClass">
           <TemplatesNbaEvents v-if="currentComponent === 'TemplatesNbaEvents'" />
           <TemplatesFlightsRightColumn v-if="currentComponent === 'TemplatesFlightsTracker'" />
+          <TemplatesFxdataCurrencyPairs v-if="currentComponent === 'TemplatesFxdataCurrencyPairs'" />
         </div>
         
       </div>
@@ -69,6 +70,7 @@ export default ({
 .holder-show, .holder-hide {
   display: flex;
   width: 100%;
+  justify-content: center;
 }
 
 .holder-hide {

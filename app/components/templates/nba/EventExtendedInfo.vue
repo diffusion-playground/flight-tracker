@@ -19,9 +19,13 @@ export default ({
 
 <style scoped>
 .extended-info {
-    display: flex;
-    width: 100%;
+    display: flex;    
     border-bottom: 1px solid lightgray;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 32rem;
 }
 
 .extended-info:last-child {

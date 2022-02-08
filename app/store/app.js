@@ -10,6 +10,7 @@ export const mutations = {
     },
     setTemplate(state, template) {
         state.template = template
+        console.log(state.template)
     },
     setLiveData(state, value) {
         state.useLiveData = value

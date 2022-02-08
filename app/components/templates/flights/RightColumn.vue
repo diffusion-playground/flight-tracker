@@ -31,8 +31,7 @@
 <script>
 export default ({    
     mounted() {
-        console.log('Flights Mounted')
-        this.moveFlightTrackerToCenter()
+        console.log('Flights Mounted')        
     },
     methods: {
         onAirlinesSelectChanged(selected) {
@@ -54,14 +53,7 @@ export default ({
             } else {
                 this.$store.commit('flights/setShowAll', false);
             }
-        },
-        moveFlightTrackerToCenter() {            
-            const el = document.getElementById('flightTracker')
-            const newParent = document.getElementById('templateMoreData')
-            el.parentNode.removeChild(el)
-            newParent.innerHTML = '';
-            newParent.appendChild(el)
-        }
+        }        
     },
     computed: {
         incomingDiffusionDataAll() {

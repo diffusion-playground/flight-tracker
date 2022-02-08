@@ -2,7 +2,7 @@
     <div class="extended-competitor">
         <img class="nba-extended-logo" v-if="isNotAt" :src="competitor.team.logo" />
         <div class="extended-score" ref="scoreAt" v-if="isAt">{{displayScore}}</div>
-        {{competitor.team.displayName}}
+        <div class="competitor-name">{{competitor.team.displayName}}</div>
         <div class="extended-score" ref="scoreHome" v-if="isNotAt">{{displayScore}}</div>
         <img class="nba-extended-logo" v-if="isAt" :src="competitor.team.logo" />        
     </div>
@@ -45,15 +45,23 @@ export default ({
     align-items: center;
 }
 .nba-extended-logo {
-    width: 48px;
+    width: 32px;
+    margin: 5px;
 }
 .extended-score {
     margin: 15px;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 700;
 }
 
 .extended-score.highlighted {
     background-color: lightgreen;
+}
+
+.competitor-name {
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-align: center;
+    max-width: fit-content;    
 }
 </style>

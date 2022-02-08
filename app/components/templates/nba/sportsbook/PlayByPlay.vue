@@ -24,8 +24,8 @@
 export default ({
     props: ['competitionId'],
     computed: {
-        plays() {
-            return this.$store.state.nba.lastPlays.filter(play => play.competitionId === this.competitionId)
+        plays() {            
+            return this.$store.state.nba.lastPlays.filter(play => play.competitionId === this.$store.state.nba.selectedCompetitionId)
         },
         periodDisplayString() {
             const competitionData = this.$store.state.nba.events.find(
@@ -94,6 +94,7 @@ export default ({
 
 .pbp-table .header div:nth-child(1), .pbp-table .rows .row div:nth-child(1) {    
     width: 3%;
+    margin-right: 5px;
 }
 
 .pbp-table .header div:nth-child(2), .pbp-table .rows .row div:nth-child(2) {    

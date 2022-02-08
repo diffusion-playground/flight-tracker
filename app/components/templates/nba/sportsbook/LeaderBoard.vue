@@ -10,7 +10,7 @@
                 <div class="leader" v-for="leaderIn in leader.leaders" :key="leaderIn.value">                                                            
                     <img class="localAvatar" :src="leaderIn.athlete.headshot"/>                    
                     <div class="l-data">
-                        <div class="l-name">{{leaderIn.athlete.displayName}} <small>{{leaderIn.athlete.position.abbreviation}}</small></div>
+                        <div class="l-name"><div>{{leaderIn.athlete.displayName}}<span>({{leaderIn.athlete.position.abbreviation}})</span></div></div>
                         <div class="l-score">
                             <div class="l-score-value">{{leaderIn.value.toFixed(2)}}</div>
                             <div class="l-score-desc">{{leader.shortDisplayName}}</div>
@@ -73,7 +73,7 @@
     }
     .l-data div {
         align-self: center;
-        font-size: 0.8rem;
+        font-size: 0.6rem;
     }
     .l-score {
         display: flex;
@@ -81,6 +81,17 @@
         justify-content: center;
     }
     .l-name, .l-score-value {
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+    }
+    .l-name div {
+        margin-right: 5px;
+    }
+    .l-name span {
+        font-size: 0.5rem;
+        margin-left: 5px;
+        color: #4bade9;
         font-weight: bold;
     }
     .l-name small, .l-score-desc {
@@ -93,8 +104,8 @@
 
     .localAvatar {
         vertical-align: middle;
-        width: 50px;
-        height: 50px;
+        width: 32px;
+        height: 32px;
         border-radius: 50%;
         background-color: #EDF6FB;
         border: 1px solid #4bade9;

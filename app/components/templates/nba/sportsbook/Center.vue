@@ -11,7 +11,20 @@
 </template>
 <script>
 export default ({
-    props: ['competitionId']
+    props: ['competitionId'],
+    methods: {
+        moveSportsBookToCenter() {            
+            const el = document.getElementById('sportsBook')
+            const newParent = document.getElementById('templateMoreData')
+            el.parentNode.removeChild(el)
+            newParent.innerHTML = '';
+            newParent.appendChild(el)
+        }
+    },
+    mounted() {
+        console.log('SportsBook Mounted')
+        this.moveSportsBookToCenter()
+    },
 })
 </script>
 <style scoped>

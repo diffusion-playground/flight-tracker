@@ -3,7 +3,7 @@
     <div class="d-centered-flex">
       <Header />
     </div>    
-    <div class="d-centered-flex justify-between">
+    <div class="d-centered-flex justify-between main-body">
       <!-- CONSUME -->
       <LeftSection /> 
       <!-- ENRICH -->     
@@ -13,6 +13,11 @@
     </div>
   </div>
 </template>
+<style scoped>
+.main-body {
+  padding: 0 40px;
+}
+</style>
 <script>
 import DataSourceFeeder from '../components/DataSourceFeeder'
 import Config from '../api/config/config'

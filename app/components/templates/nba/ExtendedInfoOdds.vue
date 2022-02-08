@@ -82,7 +82,7 @@ export default ({
 
 .odds-bold {
     color: #1C376C;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 700;
 }
 

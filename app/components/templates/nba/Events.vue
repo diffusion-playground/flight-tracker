@@ -5,8 +5,7 @@
             <div v-for="(event, index) in events" :key="event.id">
                 <TemplatesNbaEvent ref="eventItem" :event="event" :index="index" @event-clicked="onEventClicked" />
             </div>
-        </div>
-        <TemplatesNbaSportsbookModal ref="sportsBook" :competitionId="modalCompetitionId" @event-showespnmodal="toggleESPNModal"/>
+        </div>        
         <TemplatesNbaSportsbookCenter ref="sportsBookCenter" :competitionId="modalCompetitionId" />        
     </div>
 </template>
@@ -34,18 +33,10 @@ export default ({
         },
         toggleESPNModal() {
             this.$refs.espnModal.toggle()
-        },
-        moveSportsBookToCenter() {            
-            const el = document.getElementById('sportsBook')
-            const newParent = document.getElementById('templateMoreData')
-            el.parentNode.removeChild(el)
-            newParent.innerHTML = '';
-            newParent.appendChild(el)
-        }
+        }        
     },
     mounted() {
         console.log('NBA Mounted')
-        this.moveSportsBookToCenter()
     },
 })
 </script>

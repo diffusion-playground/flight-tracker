@@ -138,8 +138,19 @@
             getMapBounds(map) {
                 console.log('Zoomed')
                 //getBounds
+            },
+            moveFlightTrackerToCenter() {            
+                const el = document.getElementById('flightTracker')
+                const newParent = document.getElementById('templateMoreData')
+                el.parentNode.removeChild(el)
+                newParent.innerHTML = '';
+                newParent.appendChild(el)
             }
-        }
+        },
+        mounted() {
+            console.log('Flight tracker mounted')
+            this.moveFlightTrackerToCenter()
+        },
     }
 </script>
 <style>

@@ -92,11 +92,11 @@ export default $store => ({
         
     onDiffusionMessage(message, topic) {
         //console.log('OnDiffusioMessage: ', topic, message, this.config.getMessageCommitStorages())
-        this.config.getMessageCommitStorages().map(storageFn => {
+        this.config.getMessageCommitStorages().map(storageFn => {            
             if (typeof storageFn === 'object' ) {
                 this.store.commit(storageFn.storeSetFnString, message)
                 return
-            }
+            }            
             this.store.commit(storageFn, message)
         })
     },

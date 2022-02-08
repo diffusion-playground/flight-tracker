@@ -1,5 +1,5 @@
 <template>
-    <div class="main-col middle no-border">
+    <div class="col main-col middle no-border">
         <SectionHeader title="Enrich" subTitle="">
             <p>Breakdown your data and make it easy to navigate through.</p>
         </SectionHeader>
@@ -57,9 +57,6 @@ export default ({
 })
 </script>
 <style>
-.middle {
-    width: 90% !important;
-}
 .topic-tree-intro {
     display: flex;
     justify-content: center;
@@ -107,7 +104,7 @@ export default ({
 
 .diffusion-enabled, .diffusion-disabled {
     width: 50%;
-    margin-top: 20px;
+    margin-top: 66px;
 }
 
 .templateMoreData {

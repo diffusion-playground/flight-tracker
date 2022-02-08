@@ -1,5 +1,5 @@
 <template>    
-    <div if="event.competitions && event.competitions.length > 0" class="event-container" :class="{active: active}">
+    <div v-if="event.competitions && event.competitions.length > 0" class="event-container" :class="{active: active}">
         <a class="nba-event" href="#" @click="onEventClick" :data-id="event.competitions[0].id">        
             <TemplatesNbaListTeam :competitor="event.competitions[0].competitors[1]" />             
             <TemplatesNbaListTeam :competitor="event.competitions[0].competitors[0]" :isAt="true" />
@@ -50,7 +50,7 @@ export default ({
     display: flex;
     justify-content: flex-start;
     padding: 10px;
-    width: 27rem;
+    max-width: 32rem;
     background-color: aliceblue;
 }
 a:hover {

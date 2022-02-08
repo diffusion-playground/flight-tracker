@@ -67,12 +67,13 @@ export default ({
 }
 
 .title {    
-    font-size: 2rem;
+    font-size: 1rem;
     align-self: center;
+    margin-bottom: 8px;
 }
 
 .nba-logo {
-    width: 24px;
+    width: 32px;
 }
 
 .probabilities {
@@ -83,12 +84,13 @@ export default ({
 
 .win-percentages {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding-top: 5px;
 }
 
 .win-percentage {
     font-weight: bold;
+    font-size: 1rem;
 }
 
 .win-percentage.highlighted {
