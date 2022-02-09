@@ -1,6 +1,6 @@
 <template>
   <div class="modal-overlay" @click="$emit('close-modal')">
-    <div class="modal" @click.stop :style="style">
+    <div :ref="modalId || 'aModal'"  class="modal" @click.stop :style="style">
       <slot></slot>
     </div>
     <div class="close" @click="$emit('close-modal')">
@@ -11,7 +11,7 @@
 
 <script>
 export default {
-    props: ['width', 'height', 'minWidth'],
+    props: ['width', 'height', 'minWidth', 'modalId'],
     data() {
         return {
             style: {

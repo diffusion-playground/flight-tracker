@@ -1,5 +1,5 @@
 <template>
-    <div class="col main-col middle no-border">
+    <div class="col main-col middle no-border" >
         <SectionHeader title="Enrich" subTitle="">
             <p>Breakdown your data and make it easy to navigate through.</p>
         </SectionHeader>
@@ -12,7 +12,7 @@
 
         <img class="diffusion-enabled" src="~/assets/images/diffusion-enabled.gif" />
 
-        <Modal v-show="showModal" @close-modal="showModal = false" :width="51" :height="700">
+        <Modal ref="modalOverlay" modalId="treeModal" class="topic-tree-modal" v-show="showModal" @close-modal="showModal = false" :width="51" :height="700">
             <div class="topic-tree-intro">
                 <p>
                     You can filter and wrangle your data on-the-fly using our Topic management capability.
@@ -43,15 +43,15 @@ export default ({
         },
     },
     data() {
-        return {
+        return {            
             showModal: false,
             dslLink: 'https://docs.pushtechnology.com/docs/latest/manual/html/designguide/data/topictree/topic_views.html'
         }
     },
     methods: {
         onShowTopicsTree() {
-            this.showModal = true
-            this.$refs.topicsBrowser.show()
+            this.showModal = true            
+            this.$refs.topicsBrowser.show()                
         }
     }
 })
@@ -109,5 +109,10 @@ export default ({
 
 .templateMoreData {
     width: 90%;
+}
+
+.topic-tree-modal .modal {
+    top: 100px !important;
+    position: fixed;
 }
 </style>
