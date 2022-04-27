@@ -26,6 +26,18 @@
             :speedFilter="speedFilter"
             :altitudeFilter="altitudeFilter"
         />
+
+        <TemplatesFlightsFlightTracker             
+            :airlinesFilter="airlinesFilter" 
+            :speedFilter="speedFilter"
+            :altitudeFilter="altitudeFilter"
+            :center="this.ukraine.center"
+            :maxbounds="this.ukraine.maxbounds"
+            :append="this.ukraine.append"
+            :zoom="this.ukraine.zoom"
+            :id="ukraine"
+            :mapTitle="this.ukraine.title"
+        />
     </div>
 </template>
 <script>
@@ -74,6 +86,14 @@ export default ({
     },
     data() {
         return {
+            ukraine: {
+                id: "ukraineMap",
+                center: [50.450001, 30.523333],
+                maxbounds: [[35, 25],[55, 35]],
+                zoom: 4,
+                append: true,
+                title: "Ukraine Map"
+            },
             airlinesFilter: '--ALL--',
             speedFilter: '--ALL--',
             altitudeFilter: '--ALL--',

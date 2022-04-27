@@ -1,12 +1,13 @@
 <template>
-    <div class="flight-map" id="flightTracker">        
+    <div class="flight-map" :id="id || 'flightTracker'">        
+        <h1>{{mapTitle || 'Los Angeles'}}</h1>
         <div class="map-wrap">        
             <client-only>
                 <l-map 
-                    :zoom="7" 
-                    :minZoom="7"
-                    :center="[33.70,-100.50]" 
-                    :maxBounds="[[31, -122],[35, -115]]"
+                    :zoom="zoom || 7" 
+                    :minZoom="zoom || 7"
+                    :center="center || [33.70,-100.50]" 
+                    :maxBounds="maxbounds || [[31, -122],[35, -115]]"
                     v-on:zoomed="getMapBounds(this)"
                     :options="{preferCanvas: true}"
                 >
@@ -50,7 +51,7 @@
 </template>
 <script>               
     export default {
-        props: ['airlinesFilter', 'speedFilter', 'altitudeFilter'],
+        props: ['mapTitle', 'airlinesFilter', 'speedFilter', 'altitudeFilter', 'center', 'maxbounds', 'append', 'id', 'zoom'],
         computed: {
             flights() {                                
                 const computed = (
@@ -67,7 +68,7 @@
                                     ),
                                     this.speedFilter, this.filterSpeed // Speed filter & function
                                 )
-                                ).slice(0,100)     
+                                ).slice(0,200)     
                 return computed
             }
         },
@@ -140,10 +141,12 @@
                 //getBounds
             },
             moveFlightTrackerToCenter() {            
-                const el = document.getElementById('flightTracker')
+                const el = document.getElementById(this.id || 'flightTracker')
                 const newParent = document.getElementById('templateMoreData')
                 el.parentNode.removeChild(el)
-                newParent.innerHTML = '';
+                if (!this.append) {
+                    newParent.innerHTML = '';
+                }
                 newParent.appendChild(el)
             }
         },
